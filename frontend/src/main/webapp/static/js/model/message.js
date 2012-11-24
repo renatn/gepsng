@@ -11,7 +11,8 @@ var app = app || {};
         defaults: {
             messageId: '',
             subject: '',
-            text: ''
+            text: '',
+            send_date: 'None'
         }
 
     });

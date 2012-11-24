@@ -9,27 +9,36 @@ $(function( $ ) {
     // Our overall **AppView** is the top-level piece of UI.
     app.AppView = Backbone.View.extend({
 
-        // Instead of generating a new element, bind to the existing skeleton of
-        // the App already present in the HTML.
         el: '#gepsapp',
 
-        // At initialization we bind to the relevant events on the `Todos`
-        // collection, when items are added or changed. Kick things off by
-        // loading any preexisting todos that might be saved in *localStorage*.
         initialize: function() {
-            this.table = this.$('#messages');
+            console.log('init app view');
+            this.table = $('#messages tbody');
+
+            app.Messages.on( 'add', this.addOne, this );
+            app.Messages.on( 'reset', this.addAll, this );
+            app.Messages.on( 'all', this.render, this );
 
             app.Messages.fetch();
         },
 
-        // Re-rendering the App just means refreshing the statistics -- the rest
-        // of the app doesn't change.
         render: function() {
+            console.log('render app view');
+            return this;
+        },
 
-            if ( app.Messages.length ) {
+        addOne: function(message) {
+            console.log('add one');
+            var view = new app.MessageView({model: message});
+            this.table.append(view.render().el);
+        },
 
-            }
+        addAll: function() {
+            console.log('add all');
+            this.table.empty();
+            app.Messages.each(this.addOne, this);
         }
+
 
     });
 });

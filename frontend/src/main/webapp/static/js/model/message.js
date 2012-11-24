@@ -1,7 +1,6 @@
 var app = app || {};
 
 (function() {
-    'use strict';
 
     // Message Model
     // ----------
@@ -12,7 +11,12 @@ var app = app || {};
             messageId: '',
             subject: '',
             text: '',
-            send_date: 'None'
+            send_date: 'None',
+            selected: false
+        },
+
+        setSelected: function(selected) {
+            this.selected = selected;
         }
 
     });

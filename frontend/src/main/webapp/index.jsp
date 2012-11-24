@@ -30,6 +30,7 @@
     <script src="static/js/bootstrap.min.js"></script>
     <script src="static/js/underscore-min.js"></script>
     <script src="static/js/backbone-min.js"></script>
+    <script src="static/js/model/message.js"></script>
     <script src="static/js/collection/messages.js"></script>
     <script src="static/js/view/app.js"></script>
     <script src="static/js/app.js"></script>

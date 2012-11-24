@@ -11,7 +11,10 @@ var app = app || {};
         url: '/geps/api/messages',
 
         // Reference to this collection's model.
-        model: app.Message
+        model: app.Message,
+
+        initialize: function() {
+        }
 
     });
 

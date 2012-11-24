@@ -9,11 +9,9 @@ var app = app || {};
     app.Message = Backbone.Model.extend({
 
         defaults: {
-            id: '',
-            from: '',
+            messageId: '',
             subject: '',
-            text: '',
-            send_date: ''
+            text: ''
         }
 
     });

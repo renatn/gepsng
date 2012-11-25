@@ -6,12 +6,12 @@ $(function( $ ) {
     // ---------------
 
     // Our overall **AppView** is the top-level piece of UI.
-    app.AppView = Backbone.View.extend({
+    app.MessageListView = Backbone.View.extend({
 
         el: '#gepsapp',
 
         events: {
-            'click #createThread': 'createThread',
+       //     'click #createThread': 'createThread',
             'click #select-all': 'selectAll'
         },
 
@@ -54,6 +54,7 @@ $(function( $ ) {
 
         createThread: function() {
             console.log('Create thread');
+          //  app.GepsRouter.navigate("threads/edit");
         }
 
     });

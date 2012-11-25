@@ -7,6 +7,8 @@ var app = app || {};
 
     app.Message = Backbone.Model.extend({
 
+        url: '/geps/api/messages',
+
         defaults: {
             messageId: '',
             subject: '',
@@ -14,6 +16,7 @@ var app = app || {};
             send_date: 'None',
             selected: false
         },
+
 
         setSelected: function(selected) {
             this.set({'selected':selected});

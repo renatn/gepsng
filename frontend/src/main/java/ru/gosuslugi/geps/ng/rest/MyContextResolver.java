@@ -26,10 +26,8 @@ public class MyContextResolver implements ContextResolver<JAXBContext> {
 
     @Override
     public JAXBContext getContext(Class<?> aClass) {
-        System.out.println("Context");
         for (Class type : types) {
             if (type == aClass) {
-                System.out.println("found");
                 return context;
             }
         }

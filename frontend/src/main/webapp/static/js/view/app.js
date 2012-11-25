@@ -11,6 +11,7 @@ $(function( $ ) {
         el: '#gepsapp',
 
         events: {
+            'click #createThread': 'createThread',
             'click #select-all': 'selectAll'
         },
 
@@ -21,8 +22,6 @@ $(function( $ ) {
 
             app.Messages.on('add', this.addOne, this );
             app.Messages.on('reset', this.addAll, this );
-            app.Messages.on('change:selected', this.filterOne, this );
-            app.Messages.on('all', this.render, this );
 
             app.Messages.fetch();
         },
@@ -47,18 +46,15 @@ $(function( $ ) {
         selectAll: function() {
             console.log("Select all");
             var selected = this.allCheckbox.checked;
-            console.log(selected);
 
             app.Messages.each(function(message) {
                 message.setSelected(selected);
             });
         },
 
-        filterOne: function(message) {
-            console.log('filter');
-            message.trigger('visible');
+        createThread: function() {
+            console.log('Create thread');
         }
-
 
     });
 });

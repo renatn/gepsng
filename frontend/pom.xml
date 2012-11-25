@@ -51,6 +51,7 @@
                     <contextPath>/geps</contextPath>
                     <stopKey>stop</stopKey>
                     <stopPort>9999</stopPort>
+                    <webDefaultXml>webdefault.xml</webDefaultXml>
                 </configuration>
             </plugin>
         </plugins>

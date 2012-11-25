@@ -16,7 +16,7 @@ var app = app || {};
         },
 
         setSelected: function(selected) {
-            this.selected = selected;
+            this.set({'selected':selected});
         }
 
     });

@@ -9,7 +9,8 @@ $(function ($) {
 
         routes: {
             '': 'default',
-            'threads/edit': 'showEdit'
+            'messages/edit': 'showEdit',
+            'messages/:id' : 'showView'
         },
 
         default: function () {
@@ -21,6 +22,13 @@ $(function ($) {
             console.log('route - edit - params:' + param);
             var message = new app.Message();
             $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+        },
+
+        showView: function(messageId) {
+            console.log('route - view - params:' + messageId);
+            var message = new app.Message({'messageId':messageId});
+            message.fetch();
+//            $("#gepsapp").html(new app.MessageView())
         }
     });
 

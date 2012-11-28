@@ -28,6 +28,7 @@ var app = app || {};
 
         viewMessage: function() {
             console.log('Click on: ' + this.model.get('messageId'));
+            app.GepsRouter.navigate('/messages/' + this.model.get('messageId'));
         }
 
     });

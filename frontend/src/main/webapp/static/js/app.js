@@ -7,7 +7,6 @@ var app = app || {};
 
         el: '#gepsapp',
 
-
         initialize: function() {
             console.log('init main view');
             this.content = $('.geps-content')[0];

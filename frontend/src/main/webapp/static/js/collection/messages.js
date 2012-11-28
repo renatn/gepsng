@@ -1,10 +1,9 @@
 var app = app || {};
 
 (function() {
-    'use strict';
 
     // Message Collection
-    // ---------------
+    // ------------------
 
     var MessageList = Backbone.Collection.extend({
 
@@ -14,11 +13,11 @@ var app = app || {};
         model: app.Message,
 
         initialize: function() {
+            console.log('init message list collection')
         }
 
     });
 
-    // Create our global collection of **Todos**.
     app.Messages = new MessageList();
 
 }());

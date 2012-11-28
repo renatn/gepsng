@@ -7,10 +7,12 @@ var app = app || {};
 
     app.Message = Backbone.Model.extend({
 
-        url: '/geps/api/messages',
+        url: function() {
+            return '/geps/api/messages/' + this.get('messageId');
+        },
 
         defaults: {
-            messageId: '',
+            messageId: null,
             subject: '',
             text: '',
             send_date: 'None',

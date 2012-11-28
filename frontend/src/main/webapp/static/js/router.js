@@ -1,19 +1,26 @@
 var app = app || {};
 
-$(function($) {
+$(function ($) {
 
     // GEPS Router
     // ----------
 
     var Workspace = Backbone.Router.extend({
-        routes:{
+
+        routes: {
+            '': 'default',
             'threads/edit': 'showEdit'
         },
 
-        showEdit: function( param ) {
+        default: function () {
+            console.log('route - default');
+            new app.MessageListView();
+        },
+
+        showEdit: function (param) {
             console.log('route - edit - params:' + param);
             var message = new app.Message();
-            $("#gepsapp").html(new app.MessageEditView({model: message}).el);
+            $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
         }
     });
 

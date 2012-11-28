@@ -1,6 +1,6 @@
 var app = app || {};
 
-$(function() {
+(function($) {
 
     // Message Edit View
     // --------------
@@ -10,10 +10,11 @@ $(function() {
         template: _.template($('#message-edit-template').html()),
 
         events: {
-            "click .save" : "save"
+            'click .save' : 'save'
         },
 
         initialize: function() {
+            console.log('init message edit view')
             this.render();
         },
 
@@ -39,4 +40,4 @@ $(function() {
         }
 
     });
-});
+})($);

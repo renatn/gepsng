@@ -1,22 +1,20 @@
 var app = app || {};
 
-$(function( $ ) {
+(function( $ ) {
 
     // The Application
     // ---------------
 
-    // Our overall **AppView** is the top-level piece of UI.
     app.MessageListView = Backbone.View.extend({
 
         el: '#gepsapp',
 
         events: {
-       //     'click #createThread': 'createThread',
             'click #select-all': 'selectAll'
         },
 
         initialize: function() {
-            console.log('init app view');
+            console.log('init list view');
             this.table = $('#messages tbody');
             this.allCheckbox = $('#select-all')[0];
 
@@ -27,14 +25,13 @@ $(function( $ ) {
         },
 
         render: function() {
-            console.log('render app view');
+            console.log('render list view');
             return this;
         },
 
         addOne: function(message) {
             console.log('add one');
-            var view = new app.MessageView({model: message});
-            this.table.append(view.render().el);
+            this.table.append((new app.MessageRowView({model: message})).render().el);
         },
 
         addAll: function() {
@@ -44,18 +41,14 @@ $(function( $ ) {
         },
 
         selectAll: function() {
-            console.log("Select all");
+            console.log("select all messages");
             var selected = this.allCheckbox.checked;
 
             app.Messages.each(function(message) {
                 message.setSelected(selected);
             });
-        },
-
-        createThread: function() {
-            console.log('Create thread');
-          //  app.GepsRouter.navigate("threads/edit");
         }
 
+
     });
-});
+})($);

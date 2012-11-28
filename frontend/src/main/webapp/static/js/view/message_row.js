@@ -1,17 +1,18 @@
 var app = app || {};
 
-$(function() {
+(function($) {
 
     // Message View
     // --------------
 
-    app.MessageView = Backbone.View.extend({
+    app.MessageRowView = Backbone.View.extend({
 
         tagName: 'tr',
 
         template: _.template($('#message-template').html()),
 
         initialize: function() {
+            console.log('init message view');
             this.model.on( 'change', this.render, this );
         },
 
@@ -22,4 +23,4 @@ $(function() {
         }
 
     });
-});
+})($);

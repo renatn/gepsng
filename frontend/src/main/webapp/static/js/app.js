@@ -1,7 +1,7 @@
 var app = app || {};
 
 $(function() {
+    console.log('Start application...');
 
-    new app.MessageListView();
 
 });

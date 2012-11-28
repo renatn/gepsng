@@ -2,10 +2,7 @@ package ru.gosuslugi.geps.ng.rest;
 
 import ru.gosuslugi.geps.ng.dto.MessageDto;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,21 @@ public class MessageResource {
     public List<MessageDto> getMessages() {
         System.out.println("Get messages: " + messages.size());
         return messages;
+    }
+
+    @GET
+    @Path("/{messageId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public MessageDto getMessage(@PathParam("messageId") Long messageId) {
+        System.out.println("Get messages: " + messages.size());
+
+        for (MessageDto messageDto : messages) {
+            if (messageDto.getMessageId().equals(messageId)) {
+                return messageDto;
+            }
+        }
+
+        return null;
     }
 
     @POST

@@ -53,20 +53,9 @@
             </div>
             <br>
 
-            <table id="messages" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th><input id="select-all" type="checkbox"></th>
-                        <th>Номер</th>
-                        <th>Отправитель</th>
-                        <th>Тема</th>
-                        <th>Дата</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="geps-content">
 
-                </tbody>
-            </table>
+            </div>
 
             <div class="pagination pull-right">
                 <ul>
@@ -88,6 +77,24 @@
     <td><%= text %></td>
     <td><%= send_date %></td>
 </script>
+
+<script type="text/template" id="messages-table-template">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th><input id="select-all" type="checkbox"></th>
+            <th>Номер</th>
+            <th>Отправитель</th>
+            <th>Тема</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</script>
+
 
 <script type="text/template" id="message-edit-template">
     <a class="btn btn-primary" href="/geps">Back</a>

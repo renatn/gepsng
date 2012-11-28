@@ -14,7 +14,7 @@ $(function ($) {
 
         default: function () {
             console.log('route - default');
-            new app.MessageListView();
+            new app.MainView();
         },
 
         showEdit: function (param) {

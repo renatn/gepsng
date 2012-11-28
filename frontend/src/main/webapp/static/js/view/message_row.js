@@ -9,6 +9,10 @@ var app = app || {};
 
         tagName: 'tr',
 
+        events: {
+            'click'  : 'viewMessage'
+        },
+
         template: _.template($('#message-template').html()),
 
         initialize: function() {
@@ -20,6 +24,10 @@ var app = app || {};
             console.log('render message');
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        viewMessage: function() {
+            console.log('Click on: ' + this.model.get('messageId'));
         }
 
     });

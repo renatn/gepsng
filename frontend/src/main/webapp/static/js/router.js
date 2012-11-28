@@ -27,8 +27,10 @@ $(function ($) {
         showView: function(messageId) {
             console.log('route - view - params:' + messageId);
             var message = new app.Message({'messageId':messageId});
-            message.fetch();
-//            $("#gepsapp").html(new app.MessageView())
+            message.fetch({success : function() {
+                console.log('message fetched');
+                $("#gepsapp").html(new app.MessageView({model: message}).render().el);
+            }});
         }
     });
 

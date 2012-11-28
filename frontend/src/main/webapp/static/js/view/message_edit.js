@@ -20,7 +20,7 @@ var app = app || {};
 
         render: function() {
             console.log('render message edit');
-            $(this.el).html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
             return this;
         },
 

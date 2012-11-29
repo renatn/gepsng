@@ -1,7 +1,6 @@
 var app = app || {};
 
 (function($) {
-    console.log('Start application...');
 
     app.MainView = Backbone.View.extend({
 

@@ -49,6 +49,14 @@
         <h4>Выбор получателя обращения</h4>
     </div>
     <div class="modal-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#">Ведомства</a>
+            </li>
+            <li><a href="#">Частные организации</a></li>
+            <li><a href="#">Группы</a></li>
+        </ul>
+
         <ul class="nav nav-list">
             <li class="nav-header">Популярные</li>
             <li><a class="organization">ПФР</a></li>
@@ -149,35 +157,38 @@
             <div class="control-group">
                 <label class="control-label">Отправитель</label>
                 <div class="controls">
-                    <input type="text" value="<%= sender %>"disabled>
+                    <input type="text" class="input-xlarge" value="<%= sender %>" disabled>
                 </div>
             </div>
-            <div class="control-group">
+            <div id="field-recipient" class="control-group">
                 <label class="control-label">Кому</label>
                 <div class="controls">
-                    <input id="recipient" type="text" placeholder="Выбрать получателя…">
+                    <input id="recipient" class="input-xlarge" type="text" placeholder="Выбрать получателя…" >
+                    <span class="help-inline"></span>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Тип обращения</label>
                 <div class="controls">
-                    <select>
+                    <select class="input-xlarge">
                         <option>Предложение</option>
                         <option>Заявление</option>
                         <option>Жалоба</option>
                     </select>
                 </div>
             </div>
-            <div class="control-group">
+            <div id="field-subject" class="control-group" >
                 <label class="control-label">Тема обращения</label>
                 <div class="controls">
-                    <input type="text" id="subject" name="subject" placeholder="Заполните тему…">
+                    <input type="text" id="subject" name="subject" class="input-xlarge" placeholder="Заполните тему…">
+                    <span class="help-inline"></span>
                 </div>
             </div>
-            <div class="control-group">
+            <div id="field-text" class="control-group">
                 <label class="control-label">Обращение</label>
                 <div class="controls">
-                    <textarea id="text" name="text" rows="10"></textarea>
+                    <textarea id="text" name="text" rows="10" class="input-xlarge"></textarea>
+                    <span class="help-inline"></span>
                 </div>
             </div>
         </fieldset>
@@ -188,6 +199,7 @@
     <a class="btn save">В черновики</a>
     <a class="btn " href="/geps">Удалить</a>
     <a class="btn pull-right back" href="/geps">Назад</a>
+
 
 </script>
 

@@ -18,6 +18,8 @@ var app = app || {};
         initialize: function() {
             console.log('init message edit view');
             this.selectOrganizationDialog = new app.OrganizationsView();
+            this.model.on('error', this.onValidationError);
+            this.model.on('sync', this.onMessageSaved, this);
         },
 
         render: function() {
@@ -29,16 +31,12 @@ var app = app || {};
         save: function() {
             console.log("save message");
 
-            var text = $("#text").val();
-            var subject = $("#subject").val();
-
             var change = {
-                "subject": subject,
-                "text": text
+                "recipient": $("#recipient").val(),
+                "subject": $("#subject").val(),
+                "text": $("#text").val()
             };
-            this.model.set(change);
-            this.model.save();
-            console.log("Save: " + this.model.get("messageId"));
+            this.model.save(change);
         },
 
         selectTo: function() {
@@ -49,6 +47,18 @@ var app = app || {};
         organizationSelected: function(organization) {
             console.log('organization selected: ' + organization);
             $('#recipient').val(organization);
+        },
+
+        onValidationError: function(model, error) {
+            console.log('validation error');
+            var field = $('#field-'+error.field);
+            field.addClass("error");
+            field.find(".help-inline").text(error.text);
+        },
+
+        onMessageSaved: function(event, model) {
+            console.log('message saved to server');
+            this.model.set({'messageId':model.messageId});
         }
 
     });

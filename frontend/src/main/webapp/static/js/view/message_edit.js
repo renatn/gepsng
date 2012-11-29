@@ -12,6 +12,7 @@ var app = app || {};
         events: {
             'click .save' : 'save',
             'click .back' : function() {app.GepsRouter.navigate('/', true)},
+            'click .send' : 'send',
             'click #recipient' : 'selectTo'
         },
 
@@ -25,6 +26,11 @@ var app = app || {};
         render: function() {
             console.log('render message edit');
             this.$el.html(this.template(this.model.toJSON()));
+
+            if (this.model.get('messageId')) {
+                this.$el.find('.send').removeClass('disabled');
+            }
+
             return this;
         },
 
@@ -37,6 +43,10 @@ var app = app || {};
                 'text': $("#text").val()
             };
             this.model.save(change);
+        },
+
+        send: function() {
+            console.log('send message');
         },
 
         selectTo: function() {
@@ -58,8 +68,9 @@ var app = app || {};
 
         onMessageSaved: function(event, model) {
             console.log('message saved to server');
-            this.model.set({'messageId':model.messageId});
+            app.GepsRouter.navigate('#messages/'+model.messageId+'/edit', true);
+
         }
 
     });
-})($);
+})(jQuery);

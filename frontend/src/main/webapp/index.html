@@ -147,10 +147,10 @@
 
 <script type="text/template" id="message-edit-template">
 
-    <a class="btn btn-primary" href="/geps">Отправить</a>
-    <a class="btn " href="/geps">Подписать и отправить</a>
+    <a class="btn btn-primary send disabled">Отправить</a>
+    <a class="btn sendSigned disabled">Подписать и отправить</a>
     <a class="btn save">В черновики</a>
-    <a class="btn " href="/geps">Удалить</a>
+    <a class="btn delete">Удалить</a>
     <a class="btn pull-right back">Назад</a>
 
     <form class="form-horizontal">
@@ -165,7 +165,11 @@
             <div id="field-recipient" class="control-group">
                 <label class="control-label">Кому</label>
                 <div class="controls">
-                    <input id="recipient" class="input-xlarge" type="text" placeholder="Выбрать получателя…" >
+                    <input id="recipient"
+                           class="input-xlarge"
+                           type="text"
+                           value="<%= recipient %>"
+                           placeholder="Выбрать получателя…" >
                     <span class="help-inline"></span>
                 </div>
             </div>
@@ -182,25 +186,33 @@
             <div id="field-subject" class="control-group" >
                 <label class="control-label">Тема обращения</label>
                 <div class="controls">
-                    <input type="text" id="subject" name="subject" class="input-xlarge" placeholder="Заполните тему…">
+                    <input type="text"
+                           id="subject"
+                           name="subject"
+                           class="input-xlarge"
+                           value="<%= subject %>"
+                           placeholder="Заполните тему…">
                     <span class="help-inline"></span>
                 </div>
             </div>
             <div id="field-text" class="control-group">
                 <label class="control-label">Обращение</label>
                 <div class="controls">
-                    <textarea id="text" name="text" rows="10" class="input-xlarge"></textarea>
+                    <textarea id="text"
+                              name="text"
+                              rows="10"
+                              class="input-xlarge"><%= text %></textarea>
                     <span class="help-inline"></span>
                 </div>
             </div>
         </fieldset>
     </form>
 
-    <a class="btn btn-primary" href="/geps">Отправить</a>
-    <a class="btn " href="/geps">Подписать и отправить</a>
+    <a class="btn btn-primary send disabled">Отправить</a>
+    <a class="btn sendSigned disabled">Подписать и отправить</a>
     <a class="btn save">В черновики</a>
-    <a class="btn " href="/geps">Удалить</a>
-    <a class="btn pull-right back" href="/geps">Назад</a>
+    <a class="btn delete">Удалить</a>
+    <a class="btn pull-right back">Назад</a>
 
 
 </script>

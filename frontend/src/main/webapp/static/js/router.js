@@ -11,6 +11,7 @@ $(function ($) {
             '': 'default',
             '#': 'default',
             'messages/edit': 'showEdit',
+            'messages/:id/edit': 'showEdit',
             'messages/:id' : 'showView'
         },
 
@@ -19,10 +20,18 @@ $(function ($) {
             new app.MainView();
         },
 
-        showEdit: function (param) {
-            console.log('route - edit - params:' + param);
-            var message = new app.Message();
-            $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+        showEdit: function (messageId) {
+            console.log('route - edit - params:' + messageId);
+
+            var message = new app.Message({'messageId':messageId});
+            if (messageId) {
+                message.fetch({success : function() {
+                    console.log('message fetched');
+                    $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+                }});
+            } else {
+                $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+            }
         },
 
         showView: function(messageId) {

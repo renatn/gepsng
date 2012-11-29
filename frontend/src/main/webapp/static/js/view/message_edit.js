@@ -32,9 +32,9 @@ var app = app || {};
             console.log("save message");
 
             var change = {
-                "recipient": $("#recipient").val(),
-                "subject": $("#subject").val(),
-                "text": $("#text").val()
+                'recipient': $("#recipient").val(),
+                'subject': $("#subject").val(),
+                'text': $("#text").val()
             };
             this.model.save(change);
         },

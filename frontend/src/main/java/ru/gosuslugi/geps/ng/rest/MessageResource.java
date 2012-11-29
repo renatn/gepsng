@@ -5,6 +5,7 @@ import ru.gosuslugi.geps.ng.dto.MessageDto;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -22,8 +23,10 @@ public class MessageResource {
     static {
         MessageDto dto = new MessageDto();
         dto.setMessageId(123L);
+        dto.setRecipient("ПФР");
         dto.setSubject("Hello World!");
         dto.setText("Amazing");
+        dto.setSendDate(new Date());
 
         messages.add(dto);
 
@@ -31,6 +34,9 @@ public class MessageResource {
         dto.setMessageId(321L);
         dto.setSubject("Star Wars");
         dto.setText("Episode 7");
+        dto.setSendDate(new Date());
+        dto.setSender("МВД России");
+        dto.setRecipient("МВД России");
 
         messages.add(dto);
     }

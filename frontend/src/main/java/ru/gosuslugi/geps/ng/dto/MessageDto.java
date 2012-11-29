@@ -1,6 +1,7 @@
 package ru.gosuslugi.geps.ng.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  * User: renatn
@@ -16,6 +17,8 @@ public class MessageDto {
     private String recipient;
     private String subject;
     private String text;
+    private Date updateDate;
+    private Date sendDate;
 
     public Long getMessageId() {
         return messageId;
@@ -55,5 +58,21 @@ public class MessageDto {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public Date getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(Date sendDate) {
+        this.sendDate = sendDate;
     }
 }

@@ -41,10 +41,10 @@ var app = app || {};
 
         selectTo: function() {
             console.log('select to');
-            this.selectOrganizationDialog.show(this.organizationSelected);
+            this.selectOrganizationDialog.show(this.onOrganizationSelected);
         },
 
-        organizationSelected: function(organization) {
+        onOrganizationSelected: function(organization) {
             console.log('organization selected: ' + organization);
             $('#recipient').val(organization);
         },

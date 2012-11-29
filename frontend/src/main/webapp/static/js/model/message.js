@@ -22,7 +22,8 @@ var app = app || {};
             text: '',
             sender: 'Борцов Дмитрий',
             recipient: '',
-            send_date: 'None',
+            sendDate: null,
+            updateDate: null,
             selected: false
         },
 

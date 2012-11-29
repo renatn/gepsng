@@ -1,7 +1,6 @@
 var app = app || {};
 
 (function($) {
-    console.log('Start application...');
 
     app.OrganizationsView = Backbone.View.extend({
 
@@ -28,7 +27,6 @@ var app = app || {};
         }
 
     });
-
 
 
 })($);

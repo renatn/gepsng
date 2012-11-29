@@ -18,7 +18,7 @@
         <div class="container">
             <a class="brand" href="/geps">ГЭПС</a>
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="#">Борцов Д.В.</a>
+                <a class="btn btn-inverse" href="#">Насыров Р.В.</a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -76,9 +76,10 @@
 <script type="text/template" id="message-row-template">
     <td><input type="checkbox" <%= selected ? 'checked' : '' %>></td>
     <td><%= messageId %></td>
-    <td><%= sender %></td>
+    <td><%= recipient %></td>
     <td><%= subject %></td>
-    <td><%= send_date %></td>
+    <td><%= updateDate %></td>
+    <td><%= sendDate ? sendDate : 'Черновик' %></td>
 </script>
 
 <script type="text/template" id="messages-table-template">
@@ -116,8 +117,9 @@
         <tr>
             <th><input id="select-all" type="checkbox"></th>
             <th>Номер</th>
-            <th>Отправитель</th>
+            <th>Ведомство</th>
             <th>Тема</th>
+            <th>Изменено</th>
             <th>Отправлено</th>
         </tr>
         </thead>
@@ -128,12 +130,12 @@
 
     <div class="pagination pull-right">
         <ul>
-            <li><a href="#">Prev</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">Next</a></li>
+            <li class="disabled"><a href="#">Пред</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#?page=2">2</a></li>
+            <li><a href="#?page=3">3</a></li>
+            <li><a href="#?page=4">4</a></li>
+            <li><a href="#?page=2">След</a></li>
         </ul>
     </div>
 

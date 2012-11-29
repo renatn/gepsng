@@ -21,7 +21,7 @@ var app = app || {};
 
         addAll: function() {
             console.log('add all');
-            $(this.content).html((new app.MessageListView()).render().el);
+            this.$el.html((new app.MessageListView()).render().el);
         }
 
     });

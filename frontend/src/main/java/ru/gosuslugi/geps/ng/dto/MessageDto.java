@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MessageDto {
 
     private Long messageId;
+    private String sender;
+    private String recipient;
     private String subject;
     private String text;
 
@@ -21,6 +23,22 @@ public class MessageDto {
 
     public void setMessageId(Long messageId) {
         this.messageId = messageId;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 
     public String getSubject() {

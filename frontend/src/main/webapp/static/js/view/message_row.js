@@ -13,7 +13,7 @@ var app = app || {};
             'click'  : 'viewMessage'
         },
 
-        template: _.template($('#message-template').html()),
+        template: _.template($('#message-row-template').html()),
 
         initialize: function() {
             console.log('init message view');

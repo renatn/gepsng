@@ -10,11 +10,12 @@ var app = app || {};
         template: _.template($('#message-edit-template').html()),
 
         events: {
-            'click .save' : 'save'
+            'click .save' : 'save',
+            'click .back' : function() {app.GepsRouter.navigate('/', true)}
         },
 
         initialize: function() {
-            console.log('init message edit view')
+            console.log('init message edit view');
             this.render();
         },
 

@@ -9,6 +9,7 @@ $(function ($) {
 
         routes: {
             '': 'default',
+            '#': 'default',
             'messages/edit': 'showEdit',
             'messages/:id' : 'showView'
         },

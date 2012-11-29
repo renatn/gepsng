@@ -89,7 +89,7 @@ public class MessageResource {
         found.setText(dto.getText());
 
         String action = dto.getAction();
-        if (action != null && action.equals("SEND")) {
+        if (action != null && action.toUpperCase().equals("SEND")) {
             sendMessage(messageId);
         }
         return found;
@@ -98,6 +98,7 @@ public class MessageResource {
     private void sendMessage(Long messageId) {
         MessageDto dto = findMessageById(messageId);
         if (dto != null) {
+            System.out.println("Message sent: " + messageId);
             dto.setSendDate(new Date());
         }
     }

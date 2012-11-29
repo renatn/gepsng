@@ -37,19 +37,28 @@ var app = app || {};
         save: function() {
             console.log("save message");
 
-            var change = {
-                'recipient': $("#recipient").val(),
-                'subject': $("#subject").val(),
-                'text': $("#text").val()
-            };
-            var success = this.model.set(change);
-            if (success) {
+            var change = this.readForm();
+            if (this.model.set(change)) {
                 this.model.save();
             }
         },
 
+        readForm: function() {
+            return  {
+                'recipient': $("#recipient").val(),
+                'subject': $("#subject").val(),
+                'text': $("#text").val()
+            };
+        },
+
         send: function() {
             console.log('send message');
+            var change = this.readForm();
+            _.extend(change, {action:'send'});
+            if (this.model.set(change)) {
+                this.model.save();
+                app.GepsRouter.navigate('#', true);
+            }
         },
 
         selectTo: function() {
@@ -74,7 +83,8 @@ var app = app || {};
         onMessageSaved: function(event, model) {
             console.log('message saved to server');
             this.hideErrors();
-            app.GepsRouter.navigate('#messages/'+model.messageId+'/edit', true);
+            app.GepsRouter.navigate('#messages/'+model.messageId+'/edit', false);
+            this.$el.find('.send').removeClass('disabled');
         },
 
         hideErrors: function() {

@@ -43,8 +43,7 @@
 
 </div>
 
-
-<div id="selectOrganization" class="modal hide fade" tabindex="-1"  role="dialog">
+<div id="selectOrganizationDialog" class="modal hide fade" tabindex="-1"  role="dialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4>Выбор получателя обращения</h4>
@@ -52,13 +51,13 @@
     <div class="modal-body">
         <ul class="nav nav-list">
             <li class="nav-header">Популярные</li>
-            <li><a href="#">ПФР</a></li>
-            <li><a href="#">Минкомсвязь России</a></li>
-            <li><a href="#">Минобороны</a></li>
+            <li><a class="organization">ПФР</a></li>
+            <li><a class="organization">Минкомсвязь России</a></li>
+            <li><a class="organization">Минобороны</a></li>
             <li class="nav-header">Все</li>
-            <li><a href="#">ПФР</a></li>
-            <li><a href="#">Минкомсвязь России</a></li>
-            <li><a href="#">Минобороны</a></li>
+            <li><a class="organization">ПФР</a></li>
+            <li><a class="organization">Минкомсвязь России</a></li>
+            <li><a class="organization">Минобороны</a></li>
         </ul>
     </div>
     <div class="modal-footer">
@@ -84,8 +83,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#">Статус обращения</a></li>
-                <li><a href="#">Нет реакции на обращение</a></li>
+                <li><a href="#templates/1">Статус обращения</a></li>
+                <li><a href="#templates/2">Нет реакции на обращение</a></li>
+                <li><a href="#templates/3">Использование интернет-портала</a></li>
             </ul>
         </div>
 
@@ -155,7 +155,7 @@
             <div class="control-group">
                 <label class="control-label">Кому</label>
                 <div class="controls">
-                    <input id="recipient" type="text" placeholder="Type something…">
+                    <input id="recipient" type="text" placeholder="Выбрать получателя…">
                 </div>
             </div>
             <div class="control-group">
@@ -171,7 +171,7 @@
             <div class="control-group">
                 <label class="control-label">Тема обращения</label>
                 <div class="controls">
-                    <input type="text" id="subject" name="subject" placeholder="Type something…">
+                    <input type="text" id="subject" name="subject" placeholder="Заполните тему…">
                 </div>
             </div>
             <div class="control-group">
@@ -200,6 +200,7 @@
 <script src="static/js/view/message_row.js"></script>
 <script src="static/js/view/message_list.js"></script>
 <script src="static/js/view/message_view.js"></script>
+<script src="static/js/view/organizations.js"></script>
 <script src="static/js/view/message_edit.js"></script>
 <script src="static/js/router.js"></script>
 <script src="static/js/app.js"></script>

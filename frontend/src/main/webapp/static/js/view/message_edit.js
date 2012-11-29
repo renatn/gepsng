@@ -17,7 +17,7 @@ var app = app || {};
 
         initialize: function() {
             console.log('init message edit view');
-            this.render();
+            this.selectOrganizationDialog = new app.OrganizationsView();
         },
 
         render: function() {
@@ -43,10 +43,13 @@ var app = app || {};
 
         selectTo: function() {
             console.log('select to');
-            $('#selectOrganization').modal();
+            this.selectOrganizationDialog.show(this.organizationSelected);
+        },
+
+        organizationSelected: function(organization) {
+            console.log('organization selected: ' + organization);
+            $('#recipient').val(organization);
         }
-
-
 
     });
 })($);

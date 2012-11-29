@@ -11,7 +11,8 @@ var app = app || {};
 
         events: {
             'click .save' : 'save',
-            'click .back' : function() {app.GepsRouter.navigate('/', true)}
+            'click .back' : function() {app.GepsRouter.navigate('/', true)},
+            'click #recipient' : 'selectTo'
         },
 
         initialize: function() {
@@ -38,7 +39,14 @@ var app = app || {};
             this.model.set(change);
             this.model.save();
             console.log("Save: " + this.model.get("messageId"));
+        },
+
+        selectTo: function() {
+            console.log('select to');
+            $('#selectOrganization').modal();
         }
+
+
 
     });
 })($);

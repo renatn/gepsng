@@ -42,7 +42,10 @@ var app = app || {};
                 'subject': $("#subject").val(),
                 'text': $("#text").val()
             };
-            this.model.save(change);
+            var success = this.model.set(change);
+            if (success) {
+                this.model.save();
+            }
         },
 
         send: function() {
@@ -59,17 +62,24 @@ var app = app || {};
             $('#recipient').val(organization);
         },
 
-        onValidationError: function(model, error) {
+        onValidationError: function(model, errors) {
             console.log('validation error');
-            var field = $('#field-'+error.field);
-            field.addClass("error");
-            field.find(".help-inline").text(error.text);
+            _.each(errors, function(error){
+                var field = $('#field-'+error.name);
+                field.addClass("error");
+                field.find(".help-inline").text(error.message);
+            });
         },
 
         onMessageSaved: function(event, model) {
             console.log('message saved to server');
+            this.hideErrors();
             app.GepsRouter.navigate('#messages/'+model.messageId+'/edit', true);
+        },
 
+        hideErrors: function() {
+            this.$('.control-group').removeClass('error');
+            this.$('.help-inline').text('');
         }
 
     });

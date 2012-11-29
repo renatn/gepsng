@@ -19,6 +19,7 @@ public class MessageDto {
     private String text;
     private Date updateDate;
     private Date sendDate;
+    private String action;
 
     public Long getMessageId() {
         return messageId;
@@ -75,4 +76,13 @@ public class MessageDto {
     public void setSendDate(Date sendDate) {
         this.sendDate = sendDate;
     }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
 }

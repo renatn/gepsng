@@ -8,13 +8,14 @@ var app = app || {};
     app.Message = Backbone.Model.extend({
 
         url: function() {
-            var target = '/geps/api/messages';
-            var messageId = this.get('messageId');
-            if (messageId) {
-                target += '/' + messageId;
+            var base = '/geps/api/messages';
+            if (this.isNew()) {
+                return base;
             }
-            return target;
+            return base  + '/' + this.id;
         },
+
+        idAttribute: "messageId",
 
         defaults: {
             messageId: null,
@@ -24,23 +25,31 @@ var app = app || {};
             recipient: '',
             sendDate: null,
             updateDate: null,
-            selected: false
+            selected: false,
+            action: null
         },
 
         validate: function(attrs) {
 
+            if (!attrs.action) {
+                return false;
+            }
+
+            var errors = [];
+
             if (!attrs.recipient) {
-                return {'field':'recipient','text':'Не выбран получатель'};
+                errors.push({name:'recipient', message:'Не выбран получатель'});
             }
 
             if (!attrs.subject) {
-                return {'field':'subject','text':'У обращения отсутствует тема'};
+                errors.push({name:'subject', message:'У обращения отсутствует тема'});
             }
 
             if (!attrs.text) {
-                return {'field':'text','text':'У обращения отсутствует текст'};
+                errors.push({name:'text', message:'У обращения отсутствует текст'});
             }
 
+            return errors.length > 0 ? errors : false;
         },
 
         setSelected: function(selected) {

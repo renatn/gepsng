@@ -16,7 +16,7 @@ var app = app || {};
         template: _.template($('#message-row-template').html()),
 
         initialize: function() {
-            console.log('init message view');
+            console.log('init message row view');
             this.model.on( 'change', this.render, this );
         },
 

@@ -44,7 +44,11 @@ public class MessageResource {
 
     @GET
     public List<MessageDto> getMessages() {
-        System.out.println("Get messages: " + messages.size());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return messages;
     }
 

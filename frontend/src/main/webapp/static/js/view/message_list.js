@@ -17,18 +17,26 @@ var app = app || {};
 
         initialize: function() {
             console.log('init list view');
+            app.Messages.on('reset', this.addAll, this );
+            app.Messages.fetch();
         },
 
         render: function() {
             console.log('render list view');
             this.$el.html(this.template({}));
-            app.Messages.each(this.addMessage, this);
             return this;
         },
 
         addMessage: function(message) {
             console.log('add one');
             $('tbody', this.el).append((new app.MessageRowView({model: message})).render().el);
+        },
+
+        addAll: function() {
+            console.log('add all');
+            $('.loading', this.el).hide();
+            $('table', this.el).removeClass('hide');
+            app.Messages.each(this.addMessage, this);
         },
 
         selectAll: function() {

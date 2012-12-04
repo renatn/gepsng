@@ -57,7 +57,7 @@ var app = app || {};
             _.extend(change, {action:'send'});
             if (this.model.set(change)) {
                 this.model.save();
-                app.GepsRouter.navigate('/', true);
+//                app.GepsRouter.navigate('/', true);
             }
         },
 

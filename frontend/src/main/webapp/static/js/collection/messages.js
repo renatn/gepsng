@@ -7,7 +7,7 @@ var app = app || {};
 
     var MessageList = Backbone.Collection.extend({
 
-        url: '/geps/api/messages',
+        url: '/geps/api/v1/messages',
 
         // Reference to this collection's model.
         model: app.Message,

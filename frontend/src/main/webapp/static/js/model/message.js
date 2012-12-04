@@ -8,7 +8,7 @@ var app = app || {};
     app.Message = Backbone.Model.extend({
 
         url: function() {
-            var base = '/geps/api/messages';
+            var base = '/geps/api/v1/messages';
             if (this.isNew()) {
                 return base;
             }

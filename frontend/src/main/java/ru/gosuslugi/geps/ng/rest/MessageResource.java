@@ -69,6 +69,7 @@ public class MessageResource {
         messageDto.setMessageId((long) random.nextInt());
         messages.add(messageDto);
         return messageDto;
+        //TODO: fill location to new resource
     }
 
     @PUT

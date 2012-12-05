@@ -7,7 +7,7 @@ var app = app || {};
 
     app.MessageListView = Backbone.View.extend({
 
-        tagName: 'div',
+        el: '#gepsapp',
 
         events: {
             'click #select-all': 'selectAll'
@@ -17,6 +17,7 @@ var app = app || {};
 
         initialize: function() {
             console.log('init list view');
+            this.render();
             app.Messages.on('reset', this.addAll, this );
             app.Messages.fetch();
         },

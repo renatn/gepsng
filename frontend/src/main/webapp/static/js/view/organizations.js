@@ -4,7 +4,7 @@ var app = app || {};
 
     app.OrganizationsView = Backbone.View.extend({
 
-        el: '#selectOrganizationDialog',
+        template : _.template($('#select-organization-dialog-template').html()),
 
         events: {
             'click .organization' : 'organizationSelected'
@@ -14,15 +14,22 @@ var app = app || {};
             console.log('init dialog organization view');
         },
 
+        render: function() {
+            this.$el.html(this.template());
+            this.$dialog = $('.selectOrganizationDialog', this.el);
+            this.$dialog.modal({show:false});
+            return this;
+        },
+
         show: function(callback) {
             console.log('show dialog organization');
             this.onSelectedItem = callback;
-            this.$el.modal();
+            this.$dialog.modal('toggle');
         },
 
         organizationSelected: function(event) {
             console.log('selected: ' + event.target.text);
-            this.$el.modal('toggle');
+            this.$dialog.modal('toggle');
             this.onSelectedItem(event.target.text);
         }
 

@@ -19,13 +19,16 @@ var app = app || {};
         initialize: function() {
             console.log('init message edit view');
             this.selectOrganizationDialog = new app.OrganizationsView();
+
             this.model.on('error', this.onValidationError);
             this.model.on('sync', this.onMessageSaved, this);
         },
 
         render: function() {
             console.log('render message edit');
+
             this.$el.html(this.template(this.model.toJSON()));
+            $('.dialogHolder', this.el).html(this.selectOrganizationDialog.render().el);
 
             if (this.model.get('messageId')) {
                 this.$el.find('.send').removeClass('disabled');
@@ -57,7 +60,6 @@ var app = app || {};
             _.extend(change, {action:'send'});
             if (this.model.set(change)) {
                 this.model.save();
-//                app.GepsRouter.navigate('/', true);
             }
         },
 

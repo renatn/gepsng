@@ -24,7 +24,7 @@ var app = app || {};
 
         render: function() {
             console.log('render list view');
-            this.$el.html(this.template({}));
+            this.$el.html(this.template());
             return this;
         },
 

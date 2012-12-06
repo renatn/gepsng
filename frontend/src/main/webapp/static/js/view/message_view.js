@@ -7,7 +7,7 @@ var app = app || {};
 
     app.MessageView = Backbone.View.extend({
 
-        tagName: 'div',
+        el: '#gepsapp',
 
         template: _.template($('#message-view-template').html()),
 

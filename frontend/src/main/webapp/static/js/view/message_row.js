@@ -28,7 +28,13 @@ var app = app || {};
 
         viewMessage: function() {
             console.log('Click on: ' + this.model.get('messageId'));
-            app.GepsRouter.navigate('/messages/' + this.model.get('messageId'), true);
+
+            var target = '/messages/' + this.model.get('messageId');
+            if (!this.model.get('sendDate')) {
+                target += '/edit';
+            }
+
+            app.GepsRouter.navigate(target, true);
         }
 
     });

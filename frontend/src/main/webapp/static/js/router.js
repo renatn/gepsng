@@ -38,7 +38,7 @@ $(function ($) {
             var message = new app.Message({'messageId':messageId});
             message.fetch({success : function() {
                 console.log('message fetched');
-                $("#gepsapp").html(new app.MessageView({model: message}).render().el);
+                new app.MessageView({model: message});
             }});
         }
     });

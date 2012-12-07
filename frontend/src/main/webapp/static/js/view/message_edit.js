@@ -92,6 +92,13 @@ var app = app || {};
         hideErrors: function() {
             this.$('.control-group').removeClass('error');
             this.$('.help-inline').text('');
+        },
+
+        finalize: function() {
+            console.log('message view finalize');
+            this.selectOrganizationDialog.remove();
+            this.$el.unbind();
+            this.model.unbind();
         }
 
     });

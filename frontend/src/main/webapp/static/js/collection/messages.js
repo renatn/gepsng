@@ -5,7 +5,7 @@ var app = app || {};
     // Message Collection
     // ------------------
 
-    var MessageList = Backbone.Collection.extend({
+    app.MessageList = Backbone.Collection.extend({
 
         url: '/geps/api/v1/messages',
 
@@ -17,7 +17,5 @@ var app = app || {};
         }
 
     });
-
-    app.Messages = new MessageList();
 
 }());

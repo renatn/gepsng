@@ -16,7 +16,12 @@ $(function ($) {
 
         default: function () {
             console.log('route - default');
-            new app.MessageListView();
+
+            if (app.currentView && app.currentView['finalize']) {
+                app.currentView.finalize();
+            }
+
+            app.currentView = new app.MessageListView();
         },
 
         showEdit: function (messageId) {
@@ -26,11 +31,23 @@ $(function ($) {
             if (messageId) {
                 message.fetch({success : function() {
                     console.log('message fetched');
-                    $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+
+                    if (app.currentView && app.currentView['finalize']) {
+                        app.currentView.finalize();
+                    }
+
+                    app.currentView = new app.MessageEditView({model: message});
+                    $("#gepsapp").html(app.currentView.render().el);
                 }});
+
             } else {
-                $("#gepsapp").html(new app.MessageEditView({model: message}).render().el);
+                if (app.currentView && app.currentView['finalize']) {
+                    app.currentView.finalize();
+                }
+                app.currentView = new app.MessageEditView({model: message});
+                $("#gepsapp").html(app.currentView.render().el);
             }
+
         },
 
         showView: function(messageId) {
@@ -38,7 +55,11 @@ $(function ($) {
             var message = new app.Message({'messageId':messageId});
             message.fetch({success : function() {
                 console.log('message fetched');
-                new app.MessageView({model: message});
+
+                if (app.currentView && app.currentView['finalize']) {
+                    app.currentView.finalize();
+                }
+                app.currentView = new app.MessageView({model: message});
             }});
         }
     });

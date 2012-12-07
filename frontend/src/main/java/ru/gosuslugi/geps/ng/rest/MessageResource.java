@@ -28,6 +28,7 @@ public class MessageResource {
         dto.setSubject("Hello World!");
         dto.setText("Amazing");
         dto.setSendDate(new Date());
+        dto.setUpdateDate(new Date());
 
         messages.add(dto);
 
@@ -38,6 +39,7 @@ public class MessageResource {
         dto.setSendDate(new Date());
         dto.setSender("МВД России");
         dto.setRecipient("МВД России");
+        dto.setUpdateDate(new Date());
 
         messages.add(dto);
     }
@@ -67,6 +69,7 @@ public class MessageResource {
         System.out.println("- Subject: " + messageDto.getSubject());
         System.out.println("- Text: " + messageDto.getText());
         messageDto.setMessageId((long) random.nextInt());
+        messageDto.setUpdateDate(new Date());
         messages.add(messageDto);
         return messageDto;
         //TODO: fill location to new resource

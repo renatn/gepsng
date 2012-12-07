@@ -18,8 +18,10 @@ var app = app || {};
         initialize: function() {
             console.log('init list view');
             this.render();
-            app.Messages.on('reset', this.addAll, this );
-            app.Messages.fetch();
+
+            this.messages = new app.MessageList();
+            this.messages.on('reset', this.addAll, this);
+            this.messages.fetch();
         },
 
         render: function() {
@@ -37,15 +39,20 @@ var app = app || {};
             console.log('add all');
             $('.loading', this.el).hide();
             $('table', this.el).removeClass('hide');
-            app.Messages.each(this.addMessage, this);
+            this.messages.each(this.addMessage, this);
         },
 
         selectAll: function() {
             var selected = this.$el.find('#select-all')[0].checked;
 
-            app.Messages.each(function(message) {
+            this.messages.each(function(message) {
                 message.setSelected(selected);
             });
+        },
+
+        finalize: function() {
+            console.log('message list view finalize');
+            this.$el.unbind();
         }
 
     });

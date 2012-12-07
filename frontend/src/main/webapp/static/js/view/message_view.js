@@ -20,6 +20,12 @@ var app = app || {};
             console.log('render view message');
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        finalize: function() {
+            console.log('message view finalize');
+            this.$el.unbind();
+            this.model.unbind();
         }
 
     });

@@ -1,5 +1,7 @@
 package ru.gosuslugi.geps.ng.dto;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class MessageDto {
     private Date updateDate;
     private Date sendDate;
     private String action;
+    private Boolean selected;
 
     public Long getMessageId() {
         return messageId;
@@ -85,4 +88,11 @@ public class MessageDto {
         this.action = action;
     }
 
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
+    }
 }

@@ -8,11 +8,22 @@ var app = app || {};
     app.Message = Backbone.Model.extend({
 
         url: function() {
-            var base = '/geps/api/v1/messages';
-            if (this.isNew()) {
-                return base;
+
+            var target = '/geps/api/v1/messages';
+
+            // Send message
+            if (this.get('action') == 'send') {
+                console.log('send action url');
+                return '/geps/api/v1/users/10050';
             }
-            return base  + '/' + this.id;
+
+            // Create draft
+            if (this.isNew() ) {
+                return target;
+            }
+
+            // Update draft
+            return target  + '/' + this.id;
         },
 
         idAttribute: "messageId",

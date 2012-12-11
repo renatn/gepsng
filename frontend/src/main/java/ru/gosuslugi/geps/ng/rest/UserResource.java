@@ -22,7 +22,7 @@ import java.net.URISyntaxException;
 public class UserResource {
 
     @POST
-    @Path("/{userId}/inbox")
+    @Path("/{userId}")
     public Response sendMessage(@PathParam("userId") Long userId, MessageDto dto){
 
         System.out.println("Send message to " + userId);

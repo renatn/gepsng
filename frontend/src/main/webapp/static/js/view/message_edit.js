@@ -57,7 +57,8 @@ var app = app || {};
         send: function() {
             console.log('send message');
             var change = this.readForm();
-            _.extend(change, {action:'send'});
+
+            _.extend(change, {action:'send', messageId:null});
             if (this.model.set(change)) {
                 this.model.save();
             }

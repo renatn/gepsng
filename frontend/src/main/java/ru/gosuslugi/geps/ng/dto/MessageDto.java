@@ -15,8 +15,8 @@ import java.util.Date;
 public class MessageDto {
 
     private Long messageId;
-    private String sender;
-    private String recipient;
+    private UserDto sender;
+    private UserDto recipient;
     private String subject;
     private String text;
     private Date updateDate;
@@ -32,19 +32,19 @@ public class MessageDto {
         this.messageId = messageId;
     }
 
-    public String getSender() {
+    public UserDto getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(UserDto sender) {
         this.sender = sender;
     }
 
-    public String getRecipient() {
+    public UserDto getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(String recipient) {
+    public void setRecipient(UserDto recipient) {
         this.recipient = recipient;
     }
 

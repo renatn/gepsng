@@ -2,6 +2,8 @@ package ru.gosuslugi.geps.ng.service;
 
 import ru.gosuslugi.geps.ng.model.User;
 
+import java.util.List;
+
 /**
  * User: rnasyrov
  * Date: 16.12.12
@@ -11,5 +13,6 @@ public interface UserService {
 
     User getCurrentUser();
     User getUserById(Long userId);
+    List<User> getOrganizations();
 
 }

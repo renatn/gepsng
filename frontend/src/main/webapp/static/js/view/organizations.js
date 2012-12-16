@@ -12,6 +12,11 @@ var app = app || {};
 
         initialize: function() {
             console.log('init dialog organization view');
+
+            this.organizations = new app.OrganizationList();
+            this.organizations.on('reset', this.addAll, this);
+            this.organizations.fetch();
+
         },
 
         render: function() {
@@ -19,6 +24,15 @@ var app = app || {};
             this.$dialog = $('.selectOrganizationDialog', this.el);
             this.$dialog.modal({show:false});
             return this;
+        },
+
+        addOrganization: function(message) {
+            console.log('add one organization');
+        },
+
+        addAll: function() {
+            console.log('add all organizations');
+            this.organizations.each(this.addOrganization, this);
         },
 
         show: function(callback) {

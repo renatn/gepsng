@@ -1,15 +1,19 @@
 package ru.gosuslugi.geps.ng.rest;
 
 import ru.gosuslugi.geps.ng.dto.MessageDto;
+import ru.gosuslugi.geps.ng.dto.UserDto;
+import ru.gosuslugi.geps.ng.model.Message;
+import ru.gosuslugi.geps.ng.model.User;
+import ru.gosuslugi.geps.ng.service.UserService;
+import ru.gosuslugi.geps.ng.service.impl.UserServiceImpl;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: rnasyrov
@@ -21,19 +25,26 @@ import java.net.URISyntaxException;
 @Produces({MediaType.APPLICATION_JSON})
 public class UserResource {
 
-    @POST
-    @Path("/{userId}")
-    public Response sendMessage(@PathParam("userId") Long userId, MessageDto dto){
+    private static UserService userService = new UserServiceImpl();
 
-        System.out.println("Send message to " + userId);
+    @GET
+    public List<UserDto> getMessages() {
 
-        URI location;
-        try {
-            location = new URI("/messages/1024");
-        } catch (URISyntaxException e) {
-            return Response.serverError().build();
+        List<UserDto> organizationListDto = new ArrayList<UserDto>();
+
+        List<User> organizations = userService.getOrganizations();
+        for (User user : organizations) {
+            UserDto dto = new UserDto(user);
+            organizationListDto.add(dto);
         }
-        return Response.created(location).build();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return organizationListDto;
     }
+
 
 }

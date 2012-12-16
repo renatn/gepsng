@@ -17,7 +17,8 @@ public class UserServiceImpl implements UserService {
 
     static {
         users.add(new User(1L, "ПФР"));
-        users.add(new User(2L, "МВД России"));
+        users.add(new User(2L, "Минкомсвязь России"));
+        users.add(new User(3L, "Минобороны"));
     }
 
     @Override
@@ -34,4 +35,10 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public List<User> getOrganizations() {
+        return users;
+    }
+
 }

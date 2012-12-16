@@ -17,7 +17,7 @@ var app = app || {};
 
         initialize: function() {
             console.log('init message row view');
-            this.model.on( 'change', this.render, this );
+            this.model.on('change', this.render, this );
         },
 
         render: function() {

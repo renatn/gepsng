@@ -35,6 +35,7 @@ public class MessageServiceImpl implements MessageService {
         messages.add(message);
 
         message = new Message();
+        message.setFromId(4444L);
         message.setMessageId(321L);
         message.setSubject("Star Wars");
         message.setText("Episode 7");
@@ -57,7 +58,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getMessages() {
+    public List<Message> getMessages(Long userId) {
         return messages;
     }
 

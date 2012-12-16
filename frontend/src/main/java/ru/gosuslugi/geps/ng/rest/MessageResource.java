@@ -30,17 +30,13 @@ public class MessageResource {
     @GET
     public List<MessageDto> getMessages() {
 
+        User user = userService.getCurrentUser();
+
         List<MessageDto> messageListDto = new ArrayList<MessageDto>();
 
-        List<Message> messages = messageService.getMessages();
+        List<Message> messages = messageService.getMessages(user.getUserId());
         for (Message message : messages) {
-            MessageDto dto = new MessageDto(message);
-
-            User recipient = userService.getUserById(message.getToId());
-            User sender = userService.getUserById(message.getFromId());
-            dto.setRecipient(new UserDto(recipient));
-            dto.setSender(new UserDto(sender));
-
+            MessageDto dto = messageToDto(message);
             messageListDto.add(dto);
         }
 
@@ -62,7 +58,8 @@ public class MessageResource {
         if (message == null) {
             throw new RuntimeException("error.message.not.found");
         }
-        return new MessageDto(message);
+
+        return messageToDto(message);
     }
 
     @POST
@@ -90,7 +87,7 @@ public class MessageResource {
         User user = userService.getCurrentUser();
         Message message = messageService.send(user.getUserId(), toId, dto.getMessageId());
 
-        return new MessageDto(message);
+        return messageToDto(message);
     }
 
     @PUT
@@ -108,10 +105,24 @@ public class MessageResource {
         }
 
         Message saved = messageService.update(user.getUserId(), message);
-
-        return new MessageDto(saved);
+        return messageToDto(saved);
 
     }
 
+    private MessageDto messageToDto(Message message) {
+        MessageDto dto = new MessageDto(message);
+
+        User recipient = userService.getUserById(message.getToId());
+        if (recipient != null) {
+            dto.setRecipient(new UserDto(recipient));
+        }
+
+        User sender = userService.getUserById(message.getFromId());
+        if (sender != null) {
+            dto.setSender(new UserDto(sender));
+        }
+
+        return dto;
+    }
 
 }

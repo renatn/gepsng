@@ -78,7 +78,7 @@
 <script type="text/template" id="message-row-template">
     <td><input type="checkbox" <%= selected ? 'checked' : '' %>></td>
     <td><%= messageId %></td>
-    <td><%= recipient %></td>
+    <td><%= recipient.name %></td>
     <td><%= subject %></td>
     <td><%= updateDate %></td>
     <td><%= sendDate ? sendDate : 'Черновик' %></td>
@@ -154,7 +154,7 @@
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                    <%= messageId %> : <%= recipient %> <span class="pull-right"><%= sendDate %></span>
+                    <%= messageId %> : <%= recipient.name %> <span class="pull-right"><%= sendDate %></span>
                 </a>
             </div>
             <div id="collapseOne" class="accordion-body collapse in">

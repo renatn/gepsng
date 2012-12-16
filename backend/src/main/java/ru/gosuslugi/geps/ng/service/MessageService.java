@@ -13,7 +13,7 @@ public interface MessageService {
 
     Message getMessageById(Long userId, Long messageId);
 
-    List<Message> getMessages();
+    List<Message> getMessages(Long userId);
 
     Message create(Long userId, Message message);
     Message update(Long userId, Message message);

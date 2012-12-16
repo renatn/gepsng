@@ -20,8 +20,8 @@ public class UserDto {
     }
 
     public UserDto(User user) {
-        this.userId = userId;
-        this.name = name;
+        this.userId = user.getUserId();
+        this.name = user.getName();
     }
 
     public Long getUserId() {

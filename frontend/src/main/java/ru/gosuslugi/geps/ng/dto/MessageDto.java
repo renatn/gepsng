@@ -1,6 +1,7 @@
 package ru.gosuslugi.geps.ng.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import ru.gosuslugi.geps.ng.model.Message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
@@ -21,8 +22,21 @@ public class MessageDto {
     private String text;
     private Date updateDate;
     private Date sendDate;
+
+    // Frontend fields
     private String action;
     private Boolean selected;
+
+    public MessageDto() {
+    }
+
+    public MessageDto(Message message) {
+        this.messageId = message.getMessageId();
+        this.subject = message.getSubject();
+        this.text = message.getText();
+        this.updateDate = message.getUpdateDate();
+        this.sendDate = message.getSendDate();
+    }
 
     public Long getMessageId() {
         return messageId;

@@ -2,6 +2,8 @@ package ru.gosuslugi.geps.ng.service;
 
 import ru.gosuslugi.geps.ng.model.Message;
 
+import java.util.List;
+
 /**
  * User: rnasyrov
  * Date: 16.12.12
@@ -9,8 +11,13 @@ import ru.gosuslugi.geps.ng.model.Message;
  */
 public interface MessageService {
 
-    Message getMessageById(Long messageId);
+    Message getMessageById(Long userId, Long messageId);
 
-    Message send(Long messageId);
+    List<Message> getMessages();
+
+    Message create(Long userId, Message message);
+    Message update(Long userId, Message message);
+
+    Message send(Long senderId, Long recipientId, Long messageId);
 
 }

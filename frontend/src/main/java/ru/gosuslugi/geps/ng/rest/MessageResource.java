@@ -2,8 +2,11 @@ package ru.gosuslugi.geps.ng.rest;
 
 import ru.gosuslugi.geps.ng.dto.MessageDto;
 import ru.gosuslugi.geps.ng.dto.UserDto;
+import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.model.User;
+import ru.gosuslugi.geps.ng.service.MessageService;
 import ru.gosuslugi.geps.ng.service.UserService;
+import ru.gosuslugi.geps.ng.service.impl.MessageServiceImpl;
 import ru.gosuslugi.geps.ng.service.impl.UserServiceImpl;
 
 import javax.ws.rs.*;
@@ -23,112 +26,79 @@ import java.util.Random;
 @Produces({MediaType.APPLICATION_JSON})
 public class MessageResource {
 
-    private static List<MessageDto> messages = new ArrayList<MessageDto>();
-
     private static UserService userService = new UserServiceImpl();
-
-    static {
-
-        User pfr = userService.getUserById(1L);
-        User mvd = userService.getUserById(2L);
-        User renat = userService.getCurrentUser();
-
-        MessageDto dto = new MessageDto();
-        dto.setMessageId(123L);
-        dto.setSender(new UserDto(renat));
-        dto.setRecipient(new UserDto(pfr));
-        dto.setSubject("Hello World!");
-        dto.setText("Amazing");
-        dto.setSendDate(new Date());
-        dto.setUpdateDate(new Date());
-
-        messages.add(dto);
-
-        dto = new MessageDto();
-        dto.setMessageId(321L);
-        dto.setSubject("Star Wars");
-        dto.setText("Episode 7");
-        dto.setSendDate(new Date());
-        dto.setRecipient(new UserDto(mvd));
-        dto.setUpdateDate(new Date());
-
-        messages.add(dto);
-    }
+    private static MessageService messageService = new MessageServiceImpl();
 
     @GET
     public List<MessageDto> getMessages() {
+
+        List<MessageDto> messageListDto = new ArrayList<MessageDto>();
+
+        List<Message> messages = messageService.getMessages();
+        for (Message message : messages) {
+            MessageDto dto = new MessageDto(message);
+
+            User recipient = userService.getUserById(message.getToId());
+            User sender = userService.getUserById(message.getFromId());
+            dto.setRecipient(new UserDto(recipient));
+            dto.setSender(new UserDto(sender));
+
+            messageListDto.add(dto);
+        }
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return messages;
+        return messageListDto;
     }
 
     @GET
     @Path("/{messageId}")
     public MessageDto getMessage(@PathParam("messageId") Long messageId) {
-        System.out.println("Get messages: " + messages.size());
-        return findMessageById(messageId);
+        Message message = messageService.getMessageById(messageId);
+        if (message == null) {
+            throw new RuntimeException("error.message.not.found");
+        }
+        return new MessageDto(message);
     }
 
     @POST
-    public MessageDto createMessage(MessageDto messageDto) {
-        Random random = new Random(System.currentTimeMillis());
+    public MessageDto createMessage(MessageDto dto) {
 
-        System.out.println("Create message");
-        System.out.println("- Subject: " + messageDto.getSubject());
-        System.out.println("- Text: " + messageDto.getText());
-        messageDto.setMessageId((long) random.nextInt());
-        messageDto.setUpdateDate(new Date());
-        messages.add(messageDto);
-        return messageDto;
+        Message message = new Message();
+        message.setFromId(userService.getCurrentUser().getUserId());
+        if (dto.getRecipient() != null) {
+            message.setToId(dto.getRecipient().getUserId());
+        }
+        message.setSubject(dto.getSubject());
+        message.setText(dto.getText());
+
+        Message saved = messageService.create(message);
+        return new MessageDto(saved);
         //TODO: fill location to new resource
     }
 
     @POST
-    @Path("/to/{toId}")
+    @Path("/sent/{toId}")
     public MessageDto sendMessage(@PathParam("toId") Long toId, MessageDto dto) {
 
-        User to = userService.getUserById(toId);
-        if (to == null) {
-            throw new RuntimeException("error.user.not.found");
-        }
+        User user = userService.getCurrentUser();
+        Message message = messageService.send(user.getUserId(), toId, dto.getMessageId());
 
-        MessageDto draft = findMessageById(dto.getMessageId());
-        if (draft == null) {
-            throw new RuntimeException("error.draft.not.found");
-        }
-
-        if (draft.getSendDate() != null) {
-            throw new RuntimeException("error.message.already.sent");
-        }
-
-        // TODO: Validate fields
-
-        draft.setRecipient(new UserDto(to));
-        draft.setSender(new UserDto(userService.getCurrentUser()));
-        draft.setSubject(dto.getSubject());
-        draft.setText(dto.getText());
-        draft.setSendDate(new Date());
-
-        return draft;
+        return new MessageDto(message);
     }
 
     @PUT
     @Path("/{messageId}")
     public MessageDto updateMessage(@PathParam("messageId") Long messageId, MessageDto dto) {
 
-        if (dto == null) {
-            System.out.println("Null!!!");
-            return dto;
-        }
 
-        MessageDto found = findMessageById(messageId);
-        if (found == null) {
-            System.out.println("Not found");
-            return dto;
-        }
+        User user = userService.getCurrentUser();
+        Message message = messageService.update(user.getUserId(), message);
+
+        return new MessageDto(message);
 
         found.setUpdateDate(new Date());
         found.setSender(dto.getSender());
@@ -140,13 +110,5 @@ public class MessageResource {
     }
 
 
-    private MessageDto findMessageById(Long messageId) {
-        for (MessageDto messageDto : messages) {
-            if (messageDto.getMessageId().equals(messageId)) {
-                return messageDto;
-            }
-        }
-        return null;
-    }
 
 }

@@ -78,6 +78,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message update(Long userId, Message message) {
+
         Message found = getMessageById(userId, message.getMessageId());
         if (found == null) {
             throw new RuntimeException("error.service.message.not.found");

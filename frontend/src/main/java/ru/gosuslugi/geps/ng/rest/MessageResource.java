@@ -12,9 +12,7 @@ import ru.gosuslugi.geps.ng.service.impl.UserServiceImpl;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * User: renatn
@@ -57,7 +55,10 @@ public class MessageResource {
     @GET
     @Path("/{messageId}")
     public MessageDto getMessage(@PathParam("messageId") Long messageId) {
-        Message message = messageService.getMessageById(messageId);
+
+        User user = userService.getCurrentUser();
+
+        Message message = messageService.getMessageById(user.getUserId(), messageId);
         if (message == null) {
             throw new RuntimeException("error.message.not.found");
         }
@@ -67,6 +68,8 @@ public class MessageResource {
     @POST
     public MessageDto createMessage(MessageDto dto) {
 
+        User user = userService.getCurrentUser();
+
         Message message = new Message();
         message.setFromId(userService.getCurrentUser().getUserId());
         if (dto.getRecipient() != null) {
@@ -75,7 +78,7 @@ public class MessageResource {
         message.setSubject(dto.getSubject());
         message.setText(dto.getText());
 
-        Message saved = messageService.create(message);
+        Message saved = messageService.create(user.getUserId(), message);
         return new MessageDto(saved);
         //TODO: fill location to new resource
     }
@@ -94,21 +97,21 @@ public class MessageResource {
     @Path("/{messageId}")
     public MessageDto updateMessage(@PathParam("messageId") Long messageId, MessageDto dto) {
 
-
         User user = userService.getCurrentUser();
-        Message message = messageService.update(user.getUserId(), message);
 
-        return new MessageDto(message);
+        Message message = new Message();
+        message.setMessageId(messageId);
+        message.setSubject(dto.getSubject());
+        message.setText(dto.getText());
+        if (dto.getRecipient() != null) {
+            message.setToId(dto.getRecipient().getUserId());
+        }
 
-        found.setUpdateDate(new Date());
-        found.setSender(dto.getSender());
-        found.setRecipient(dto.getRecipient());
-        found.setSubject(dto.getSubject());
-        found.setText(dto.getText());
+        Message saved = messageService.update(user.getUserId(), message);
 
-        return found;
+        return new MessageDto(saved);
+
     }
-
 
 
 }

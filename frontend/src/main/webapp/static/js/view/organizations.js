@@ -16,7 +16,6 @@ var app = app || {};
             this.organizations = new app.OrganizationList();
             this.organizations.on('reset', this.addAll, this);
             this.organizations.fetch();
-
         },
 
         render: function() {
@@ -26,25 +25,32 @@ var app = app || {};
             return this;
         },
 
-        addOrganization: function(message) {
-            console.log('add one organization');
-        },
-
         addAll: function() {
             console.log('add all organizations');
-            this.organizations.each(this.addOrganization, this);
+
+            var popularOrganizations = '';
+            this.organizations.each(function(organization){
+                popularOrganizations += '<li><a class="organization">'+organization.get('name')+'</a></li>';
+            });
+            $('.nav-header').first().after(popularOrganizations);
+            $('.nav-header').last().after(popularOrganizations);
         },
 
         show: function(callback) {
             console.log('show dialog organization');
+
             this.onSelectedItem = callback;
             this.$dialog.modal('toggle');
         },
 
         organizationSelected: function(event) {
             console.log('selected: ' + event.target.text);
+
+            var index = $(event.target).parent().prevAll().length-1;
+            var organization = this.organizations.at(index);
+
             this.$dialog.modal('toggle');
-            this.onSelectedItem(event.target.text);
+            this.onSelectedItem(organization);
         }
 
     });

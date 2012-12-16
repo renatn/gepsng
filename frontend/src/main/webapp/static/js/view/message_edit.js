@@ -48,7 +48,6 @@ var app = app || {};
 
         readForm: function() {
             return  {
-                'recipient': $("#recipient").val(),
                 'subject': $("#subject").val(),
                 'text': $("#text").val()
             };
@@ -66,12 +65,14 @@ var app = app || {};
 
         selectTo: function() {
             console.log('select to');
-            this.selectOrganizationDialog.show(this.onOrganizationSelected);
+            var callback = _.bind(this.onOrganizationSelected, this);
+            this.selectOrganizationDialog.show(callback);
         },
 
         onOrganizationSelected: function(organization) {
-            console.log('organization selected: ' + organization);
-            $('#recipient').val(organization);
+            console.log('organization selected: ' + organization.get('name'));
+            $('#recipient').val(organization.get('name'));
+            this.model.set({'recipient': organization.toJSON()});
         },
 
         onValidationError: function(model, errors) {

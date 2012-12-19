@@ -28,6 +28,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long userId) {
+
+        if (userId == null) {
+            return null;
+        }
+
+        if (userId == 4444L) {
+            return new User(4444L, "Насыров Р.В.");
+        }
+
         for(User user : users) {
             if (user.getUserId().equals(userId)) {
                 return user;

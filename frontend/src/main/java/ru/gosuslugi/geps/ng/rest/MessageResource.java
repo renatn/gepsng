@@ -97,6 +97,7 @@ public class MessageResource {
         User user = userService.getCurrentUser();
 
         Message message = new Message();
+        message.setFromId(user.getUserId());
         message.setMessageId(messageId);
         message.setSubject(dto.getSubject());
         message.setText(dto.getText());
@@ -118,9 +119,7 @@ public class MessageResource {
         }
 
         User sender = userService.getUserById(message.getFromId());
-        if (sender != null) {
-            dto.setSender(new UserDto(sender));
-        }
+        dto.setSender(new UserDto(sender));
 
         return dto;
     }

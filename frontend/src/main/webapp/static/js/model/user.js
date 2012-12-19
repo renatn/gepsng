@@ -7,7 +7,13 @@ var app = app || {};
 
     app.User = Backbone.Model.extend({
 
-        url: '',
+        url: function() {
+            var base = '/geps/api/v1/users';
+            if (this.isNew()) {
+                return base;
+            }
+            return base + '/' + this.id;
+        },
 
         idAttribute: "userId",
 

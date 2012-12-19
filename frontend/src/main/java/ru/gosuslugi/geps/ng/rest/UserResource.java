@@ -46,5 +46,14 @@ public class UserResource {
         return organizationListDto;
     }
 
+    @GET
+    @Path("/me")
+    public UserDto getCurrentUser() {
+        User user = userService.getCurrentUser();
+        if (user == null) {
+            throw new RuntimeException("error.user.not.found");
+        }
+        return new UserDto(user);
+    }
 
 }

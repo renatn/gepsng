@@ -87,7 +87,7 @@ var app = app || {};
         onMessageSaved: function(event, model) {
             console.log('message saved to server');
             this.hideErrors();
-            app.GepsRouter.navigate('#messages/'+model.messageId+'/edit', false);
+            app.GepsRouter.navigate('!/messages/'+model.messageId+'/edit', false);
             this.$el.find('.send').removeClass('disabled');
         },
 

@@ -28,8 +28,8 @@ $(function ($) {
         showEdit: function (messageId) {
             console.log('route - edit - params:' + messageId);
 
-            var message = new app.Message({'messageId':messageId});
             if (messageId) {
+                var message = new app.Message({'messageId':messageId});
                 message.fetch({success : function() {
                     console.log('message fetched');
 
@@ -42,11 +42,17 @@ $(function ($) {
                 }});
 
             } else {
-                if (app.currentView && app.currentView['finalize']) {
-                    app.currentView.finalize();
-                }
-                app.currentView = new app.MessageEditView({model: message});
-                $("#gepsapp").html(app.currentView.render().el);
+                var user = new app.User({userId:'me'});
+                user.fetch({success: function() {
+
+                    var message = new app.Message({sender: user.toJSON()});
+                    if (app.currentView && app.currentView['finalize']) {
+                        app.currentView.finalize();
+                    }
+                    app.currentView = new app.MessageEditView({model: message});
+                    $("#gepsapp").html(app.currentView.render().el);
+
+                }});
             }
 
         },

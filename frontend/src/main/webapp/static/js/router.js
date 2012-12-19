@@ -8,13 +8,14 @@ $(function ($) {
     var Workspace = Backbone.Router.extend({
 
         routes: {
-            '': 'default',
-            'messages/edit': 'showEdit',
-            'messages/:id/edit': 'showEdit',
-            'messages/:id' : 'showView'
+            '': 'index',
+            '!/': 'index',
+            '!/messages/edit': 'showEdit',
+            '!/messages/:id/edit': 'showEdit',
+            '!/messages/:id' : 'showView'
         },
 
-        default: function () {
+        index: function () {
             console.log('route - default');
 
             if (app.currentView && app.currentView['finalize']) {

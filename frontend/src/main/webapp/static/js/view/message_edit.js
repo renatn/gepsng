@@ -11,7 +11,7 @@ var app = app || {};
 
         events: {
             'click .save' : 'save',
-            'click .back' : function() {app.GepsRouter.navigate('/', true)},
+            'click .back' : function(){app.GepsRouter.navigate('!/', true)},
             'click .send' : 'send',
             'click #recipient' : 'selectTo'
         },

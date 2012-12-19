@@ -81,16 +81,16 @@
 <script type="text/template" id="messages-table-template">
 
     <div class="toolbar">
-        <a id="createThread" class="btn btn-primary" href="#messages/edit"><i class="icon-plus"></i>Создать обращение</a>
+        <a id="createThread" class="btn btn-primary" href="#!/messages/edit"><i class="icon-plus"></i>Создать обращение</a>
         <div class="btn-group">
             <a class="btn dropdown-toggle" data-toggle="dropdown">
                 Создать из шаблона
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#templates/1">Статус обращения</a></li>
-                <li><a href="#templates/2">Нет реакции на обращение</a></li>
-                <li><a href="#templates/3">Использование интернет-портала</a></li>
+                <li><a href="#!/templates/1">Статус обращения</a></li>
+                <li><a href="#!/templates/2">Нет реакции на обращение</a></li>
+                <li><a href="#!/templates/3">Использование интернет-портала</a></li>
             </ul>
         </div>
 
@@ -139,9 +139,9 @@
 
 <script type="text/template" id="message-view-template">
     <p>
-        <a class="btn btn-primary" href="#">Назад</a>
-        <a class="btn" href="#">Удалить</a>
-        <a class="btn" href="#">Версия для печати</a>
+        <a class="btn btn-primary" href="#!/">Назад</a>
+        <a class="btn" href="#!/">Удалить</a>
+        <a class="btn" href="#!/">Версия для печати</a>
     </p>
 
     <div class="accordion" id="accordion2">
@@ -190,7 +190,7 @@
                     <input id="recipient"
                            class="input-xlarge"
                            type="text"
-                           value="<%= recipient.name %>"
+                           value="<%= recipient && recipient.name %>"
                            placeholder="Выбрать получателя…" >
                     <span class="help-inline"></span>
                 </div>

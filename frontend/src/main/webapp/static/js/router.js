@@ -17,12 +17,7 @@ $(function ($) {
 
         index: function () {
             console.log('route - default');
-
-            if (app.currentView && app.currentView['finalize']) {
-                app.currentView.finalize();
-            }
-
-            app.currentView = new app.MessageListView();
+            app.LayoutManager.show(new app.MessageListView());
         },
 
         showEdit: function (messageId) {
@@ -30,31 +25,21 @@ $(function ($) {
 
             if (messageId) {
                 var message = new app.Message({'messageId':messageId});
-                message.fetch({success : function() {
+
+                message.fetch({success : function(){
                     console.log('message fetched');
-
-                    if (app.currentView && app.currentView['finalize']) {
-                        app.currentView.finalize();
-                    }
-
-                    app.currentView = new app.MessageEditView({model: message});
+                    app.LayoutManager.show(new app.MessageEditView({model: message}));
                     $("#gepsapp").html(app.currentView.render().el);
                 }});
 
             } else {
                 var user = new app.User({userId:'me'});
                 user.fetch({success: function() {
-
                     var message = new app.Message({sender: user.toJSON()});
-                    if (app.currentView && app.currentView['finalize']) {
-                        app.currentView.finalize();
-                    }
-                    app.currentView = new app.MessageEditView({model: message});
+                    app.LayoutManager.show(new app.MessageEditView({model: message}));
                     $("#gepsapp").html(app.currentView.render().el);
-
                 }});
             }
-
         },
 
         showView: function(messageId) {
@@ -62,11 +47,7 @@ $(function ($) {
             var message = new app.Message({'messageId':messageId});
             message.fetch({success : function() {
                 console.log('message fetched');
-
-                if (app.currentView && app.currentView['finalize']) {
-                    app.currentView.finalize();
-                }
-                app.currentView = new app.MessageView({model: message});
+                app.LayoutManager.show(new app.MessageView({model: message}));
             }});
         }
     });

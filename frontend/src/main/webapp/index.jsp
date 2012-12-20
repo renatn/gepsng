@@ -19,13 +19,11 @@
     <script src="static/js/lib/bootstrap.min.js"></script>
     <script src="static/js/lib/underscore-min.js"></script>
     <script src="static/js/lib/backbone-min.js"></script>
-
     <script>
         _.templateSettings = {
             interpolate : /\{\{(.+?)\}\}/g
         };
     </script>
-
 </head>
 <body>
 
@@ -70,6 +68,7 @@
 <script src="static/js/view/message_view.js"></script>
 <script src="static/js/view/organizations.js"></script>
 <script src="static/js/view/message_edit.js"></script>
+<script src="static/js/layout_manager.js"></script>
 <script src="static/js/router.js"></script>
 
 </body>

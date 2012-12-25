@@ -2,6 +2,7 @@
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          session="false" %>
+<%@page import="java.net.URLEncoder" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -24,21 +25,34 @@
             interpolate : /\{\{(.+?)\}\}/g
         };
     </script>
+    <script>
+        <% if (request.isUserInRole("user")) { %>
+            var AUTHENTICATED = true;
+        <%} else {%>
+            var AUTHENTICATED = false;
+        <% } %>
+    </script>
 </head>
 <body>
+
+<%
+    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=505845966105387&redirect_uri=" + URLEncoder.encode("http://gepsapp.renatn.com:8080/geps/signin", "UTF-8") + "&scope=email";
+%>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="#!/">ГЭПС</a>
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="#">Насыров Р.В.</a>
+                <a class="btn btn-primary" href="<%= fbURL %>">Connect with facebook</a>
+<%--
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="#">Выход</a></li>
                 </ul>
+--%>
             </div>
         </div>
     </div>

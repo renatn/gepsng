@@ -21,13 +21,18 @@ var app = app || {};
 
             this.messages = new app.MessageList();
             this.messages.on('reset', this.addAll, this);
-            this.messages.fetch();
+            this.messages.fetch({error: this.errorFetchMessages});
         },
 
         render: function() {
             console.log('render list view');
             this.$el.html(this.template());
             return this;
+        },
+
+        errorFetchMessages: function(messages, response) {
+            console.log('error fetch messages');
+            console.log(response.status);
         },
 
         addMessage: function(message) {

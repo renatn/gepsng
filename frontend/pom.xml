@@ -40,6 +40,12 @@
             <version>1.15</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
@@ -54,6 +60,12 @@
                     <stopKey>stop</stopKey>
                     <stopPort>9999</stopPort>
                     <webDefaultXml>webdefault.xml</webDefaultXml>
+                    <userRealms>
+                        <userRealm implementation="org.mortbay.jetty.security.HashUserRealm">
+                            <name>MyRealm</name>
+                            <config>realm.properties</config>
+                        </userRealm>
+                    </userRealms>
                 </configuration>
             </plugin>
         </plugins>

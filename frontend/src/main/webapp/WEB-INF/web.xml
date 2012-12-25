@@ -1,6 +1,9 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          version="2.5">
 
+    <display-name>GEPS</display-name>
+    <description>Government Electronic Post System</description>
+
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -10,10 +13,39 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
+    <servlet>
+        <servlet-name>Sign In With Facebook</servlet-name>
+        <servlet-class>ru.gosuslugi.geps.ng.servlet.SignInWithFacebookServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Sign In With Facebook</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/v1/*</url-pattern>
     </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>rest</web-resource-name>
+            <url-pattern>/api/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>MyRealm</realm-name>
+    </login-config>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>

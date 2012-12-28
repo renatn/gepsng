@@ -9,17 +9,32 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <http pattern="/static/**" security="none"/>
+    <http pattern="/signin.jsp" security="none"/>
+    <http path-type="regex" pattern="/signin" security="none"/>
+    <http pattern="/favicon.ico" security="none"/>
 
-    <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/**" access="permitAll"/>
+    <http pattern="/api/**" create-session="stateless">
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <http-basic/>
+    </http>
+
+    <http auto-config="true" >
+        <form-login login-page="/signin.jsp" default-target-url="/"/>
+        <intercept-url pattern="/**" access="ROLE_USER"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user" password="password" authorities="ROLE_USER" />
-                <user name="admin" password="password" authorities="ROLE_USER,ROLE_ADMIN"/>
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="fbUserDetailService"/>
     </authentication-manager>
+
+   <!-- <authentication-provider>
+        <user-service>
+            <user name="user" password="password" authorities="ROLE_USER" />
+            <user name="admin" password="password" authorities="ROLE_USER,ROLE_ADMIN"/>
+        </user-service>
+    </authentication-provider>-->
+
+    <b:bean id="fbUserDetailService" class="ru.gosuslugi.geps.ng.security.FbUserDetailService"/>
+
+
 </b:beans>

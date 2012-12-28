@@ -1,5 +1,12 @@
 package ru.gosuslugi.geps.ng.servlet;
 
+import org.apache.log4j.Logger;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +17,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * User: renatn
@@ -19,6 +28,8 @@ import java.net.URLEncoder;
 public class SignInWithFacebookServlet extends HttpServlet {
 
     private final static String SIGNIN_URL = "http://gepsapp.renatn.com:8080/geps/signin";
+
+    private final static Logger logger = Logger.getLogger(SignInWithFacebookServlet.class);
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +42,15 @@ public class SignInWithFacebookServlet extends HttpServlet {
 
         String token = requestAccessToken(code);
         String graph = requestUserData(token);
-        System.out.println("Graph: " + graph);
+        logger.info("Graph: " + graph);
+
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
+        Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken("Renat Nasyrov", "qwerty", authorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        logger.info("CREATE AUTHENTICATION");
 
         resp.sendRedirect("/geps");
     }

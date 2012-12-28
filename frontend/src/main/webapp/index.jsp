@@ -25,13 +25,6 @@
             interpolate : /\{\{(.+?)\}\}/g
         };
     </script>
-    <script>
-        <% if (request.isUserInRole("user")) { %>
-            var AUTHENTICATED = true;
-        <%} else {%>
-            var AUTHENTICATED = false;
-        <% } %>
-    </script>
 </head>
 <body>
 

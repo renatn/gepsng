@@ -44,7 +44,7 @@ public class SignInWithFacebookServlet extends HttpServlet {
         }
         FacebookProfile profile = client.requestUserData(token);
 
-        // Create authentication
+        // Create authentication // TODO: Must be AuthenticationManager
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
         Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
         Authentication authentication = new UsernamePasswordAuthenticationToken(profile.getName(), profile, authorities);

@@ -1,5 +1,4 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
 
     <display-name>GEPS</display-name>
     <description>Government Electronic Post System</description>

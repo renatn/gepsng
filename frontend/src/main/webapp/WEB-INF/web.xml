@@ -43,6 +43,18 @@
     <servlet>
         <servlet-name>Sign In With Facebook</servlet-name>
         <servlet-class>ru.gosuslugi.geps.ng.servlet.SignInWithFacebookServlet</servlet-class>
+        <init-param>
+            <param-name>clientId</param-name>
+            <param-value>505845966105387</param-value>
+        </init-param>
+        <init-param>
+            <param-name>secret</param-name>
+            <param-value>e6a4d500347f4238650af16c846e1dba</param-value>
+        </init-param>
+        <init-param>
+            <param-name>signinUrl</param-name>
+            <param-value>http://gepsapp.renatn.com:8080/geps/signin</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>

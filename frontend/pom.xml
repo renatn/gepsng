@@ -98,6 +98,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
 
             <plugin>
@@ -110,6 +111,10 @@
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
+                        </resource>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp</directory>
+                            <filtering>true</filtering>
                         </resource>
                     </webResources>
                 </configuration>

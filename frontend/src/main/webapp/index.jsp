@@ -2,7 +2,6 @@
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          session="false" %>
-<%@page import="java.net.URLEncoder" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
@@ -24,20 +23,18 @@
     <script src="static/js/lib/backbone-min.js"></script>
     <script>
         _.templateSettings = {
-            interpolate : /\{\{(.+?)\}\}/g
+            interpolate: /\{\{(.+?)\}\}/g
         };
     </script>
 </head>
 <body>
 
-<%
-    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=505845966105387&redirect_uri=" + URLEncoder.encode("http://gepsapp.renatn.com:8080/geps/signin", "UTF-8") + "&scope=email";
-%>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#!/">ГЭПС</a>
+            <a class="brand" href="/">ГЭПС</a>
+
             <div class="btn-group pull-right">
                 <a class="btn btn-inverse" href="#!/"><sec:authentication property="principal"/></a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
@@ -54,7 +51,8 @@
 <div class="container">
 
     <div class="alert alert-info">
-        <strong>Госпочта.</strong> В настоящий момент раздел предназначен для получения информационных сообщений от органов власти и организаций.
+        <strong>Госпочта.</strong> В настоящий момент раздел предназначен для получения информационных сообщений от
+        органов власти и организаций.
     </div>
 
     <div id="gepsapp">
@@ -62,9 +60,9 @@
 
 </div>
 
-<jsp:include page="WEB-INF/templates/messages-table.jsp" />
+<jsp:include page="WEB-INF/templates/messages-table.jsp"/>
 <jsp:include page="WEB-INF/templates/message-view.jsp"/>
-<jsp:include page="WEB-INF/templates/message-edit.jsp" />
+<jsp:include page="WEB-INF/templates/message-edit.jsp"/>
 
 <script src="static/js/model/message.js"></script>
 <script src="static/js/model/user.js"></script>

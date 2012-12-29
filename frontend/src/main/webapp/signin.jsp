@@ -23,7 +23,7 @@
 </head>
 <body>
 <%
-    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=505845966105387&redirect_uri=" + URLEncoder.encode("http://gepsapp.renatn.com:8080/geps/signin", "UTF-8") + "&scope=email";
+    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=${facebook.client.id}&redirect_uri=" + URLEncoder.encode("${facebook.site.url}", "UTF-8") + "&scope=email";
 %>
 
 <div class="navbar navbar-inverse navbar-fixed-top">

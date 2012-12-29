@@ -10,8 +10,8 @@
 
     <http pattern="/static/**" security="none"/>
     <http pattern="/signin.jsp" security="none"/>
-    <http path-type="regex" pattern="/signin" security="none"/>
     <http pattern="/favicon.ico" security="none"/>
+    <http pattern="/signin" security="none"/>
 
     <http pattern="/api/**" create-session="stateless">
         <intercept-url pattern="/**" access="ROLE_USER"/>

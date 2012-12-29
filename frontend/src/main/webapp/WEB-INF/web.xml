@@ -47,7 +47,7 @@
 
     <servlet-mapping>
         <servlet-name>Sign In With Facebook</servlet-name>
-        <url-pattern>/signin</url-pattern>
+        <url-pattern>/signin/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

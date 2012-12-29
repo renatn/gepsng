@@ -3,6 +3,8 @@
          pageEncoding="UTF-8"
          session="false" %>
 <%@page import="java.net.URLEncoder" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -37,7 +39,7 @@
         <div class="container">
             <a class="brand" href="#!/">ГЭПС</a>
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="#">Насыров Р.В.</a>
+                <a class="btn btn-inverse" href="#!/"><sec:authentication property="principal"/></a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>

@@ -17,10 +17,6 @@ $(function ($) {
 
         index: function () {
             console.log('route - default');
-            if (!AUTHENTICATED) {
-                console.log('welcome');
-                return;
-            }
             app.LayoutManager.show(new app.MessageListView());
         },
 

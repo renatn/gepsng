@@ -13,10 +13,9 @@
     <http pattern="/favicon.ico" security="none"/>
     <http pattern="/signin" security="none"/>
 
-    <http pattern="/api/**" create-session="stateless">
+<!--    <http pattern="/api/**" create-session="stateless">
         <intercept-url pattern="/**" access="ROLE_USER"/>
-        <http-basic/>
-    </http>
+    </http>-->
 
     <http auto-config="true" >
         <form-login login-page="/signin.jsp" default-target-url="/"/>

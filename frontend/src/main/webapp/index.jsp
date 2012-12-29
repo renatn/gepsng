@@ -37,15 +37,13 @@
         <div class="container">
             <a class="brand" href="#!/">ГЭПС</a>
             <div class="btn-group pull-right">
-                <a class="btn btn-primary" href="<%= fbURL %>">Connect with facebook</a>
-<%--
+                <a class="btn btn-inverse" href="#">Насыров Р.В.</a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Выход</a></li>
+                    <li><a href="/geps/logout">Выход</a></li>
                 </ul>
---%>
             </div>
         </div>
     </div>

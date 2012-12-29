@@ -21,6 +21,7 @@
     <http auto-config="true" >
         <form-login login-page="/signin.jsp" default-target-url="/"/>
         <intercept-url pattern="/**" access="ROLE_USER"/>
+        <logout logout-url="/logout" logout-success-url="/signin.jsp"/>
     </http>
 
     <authentication-manager>

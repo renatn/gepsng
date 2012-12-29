@@ -15,10 +15,6 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-    </listener>
-
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -45,15 +41,15 @@
         <servlet-class>ru.gosuslugi.geps.ng.servlet.SignInWithFacebookServlet</servlet-class>
         <init-param>
             <param-name>clientId</param-name>
-            <param-value>505845966105387</param-value>
+            <param-value>${facebook.client.id}</param-value>
         </init-param>
         <init-param>
             <param-name>secret</param-name>
-            <param-value>e6a4d500347f4238650af16c846e1dba</param-value>
+            <param-value>${facebook.secret}</param-value>
         </init-param>
         <init-param>
             <param-name>signinUrl</param-name>
-            <param-value>http://gepsapp.renatn.com:8080/geps/signin</param-value>
+            <param-value>${facebook.site.url}</param-value>
         </init-param>
     </servlet>
 

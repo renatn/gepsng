@@ -50,14 +50,7 @@ public class FacebookClient {
         URL u = new URL(g);
         URLConnection c = u.openConnection();
         BufferedReader reader = new BufferedReader(new InputStreamReader(c.getInputStream()));
-/*        String inputLine;
-        StringBuilder b = new StringBuilder();
-        while ((inputLine = in.readLine()) != null)
-            b.append(inputLine).append("\n");
-        in.close();*/
-
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(reader, FacebookProfile.class);
-
     }
 }

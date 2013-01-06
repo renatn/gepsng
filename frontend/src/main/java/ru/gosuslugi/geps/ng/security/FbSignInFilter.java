@@ -1,8 +1,18 @@
 package ru.gosuslugi.geps.ng.security;
 
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
+import ru.gosuslugi.geps.ng.facebook.FacebookClient;
+import ru.gosuslugi.geps.ng.facebook.FacebookProfile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,15 +20,57 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 28.12.12
  * Time: 14:31
  */
-public class FbSignInFilter extends AbstractPreAuthenticatedProcessingFilter {
+public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
 
-    @Override
-    protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    private String clientId;
+    private String secret;
+    private String siteUrl;
+
+    protected FbSignInFilter() {
+        super("/signin");
     }
 
     @Override
-    protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse resp) throws AuthenticationException, IOException, ServletException {
+        String code = req.getParameter("code");
+        if (code == null || code.equals("")) {
+            throw new AuthenticationServiceException("Facebook code is empty!");
+        }
+
+        FacebookClient client = new FacebookClient(clientId, secret, siteUrl);
+        String token = client.requestAccessToken(code);
+        if (token.startsWith("{")) {
+            throw new IOException("error on requesting token: " + token + " with code: " + code);
+        }
+        FacebookProfile profile = client.requestUserData(token);
+
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getName(), "N/A");
+        authentication.setDetails(authenticationDetailsSource.buildDetails(req));
+        return this.getAuthenticationManager().authenticate(authentication);
+
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
     }
 }

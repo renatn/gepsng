@@ -12,7 +12,7 @@
     <title>GEPS New Generation</title>
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -32,17 +32,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
             <a class="brand" href="./">ГЭПС</a>
-            <div class="nav-collapse collapse">
-                <div class="btn-group pull-right">
-                    <a class="btn btn-primary" href="<%= fbURL %>">Connect with facebook</a>
-                </div>
+            <div class="btn-group pull-right">
+                <a class="btn btn-primary" href="<%= fbURL %>">Connect with facebook</a>
             </div>
         </div>
     </div>

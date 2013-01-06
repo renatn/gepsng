@@ -26,6 +26,10 @@
             interpolate: /\{\{(.+?)\}\}/g
         };
     </script>
+    <script>
+        // Facebook redirect back with url fragment #_=_
+        if (window.location.hash == "#_=_") window.location.hash = "#!/";
+    </script>
 </head>
 <body>
 
@@ -36,7 +40,7 @@
             <a class="brand" href="/">ГЭПС</a>
 
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="#!/"><sec:authentication property="principal"/></a>
+                <a class="btn btn-inverse" href="#!/"><sec:authentication property="principal.username"/></a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>

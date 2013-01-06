@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        if (userId == 4444L) {
+        if (userId.equals(4444L)) {
             return new User(4444L, "Насыров Р.В.");
         }
 

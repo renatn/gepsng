@@ -35,28 +35,6 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet>
-        <servlet-name>Sign In With Facebook</servlet-name>
-        <servlet-class>ru.gosuslugi.geps.ng.servlet.SignInWithFacebookServlet</servlet-class>
-        <init-param>
-            <param-name>clientId</param-name>
-            <param-value>${facebook.client.id}</param-value>
-        </init-param>
-        <init-param>
-            <param-name>secret</param-name>
-            <param-value>${facebook.secret}</param-value>
-        </init-param>
-        <init-param>
-            <param-name>signinUrl</param-name>
-            <param-value>${facebook.site.url}</param-value>
-        </init-param>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Sign In With Facebook</servlet-name>
-        <url-pattern>/signin/*</url-pattern>
-    </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/v1/*</url-pattern>

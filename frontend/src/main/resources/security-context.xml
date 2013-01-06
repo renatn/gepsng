@@ -11,30 +11,25 @@
     <http pattern="/static/**" security="none"/>
     <http pattern="/signin.jsp" security="none"/>
     <http pattern="/favicon.ico" security="none"/>
-    <http pattern="/signin" security="none"/>
 
-<!--    <http pattern="/api/**" create-session="stateless">
-        <intercept-url pattern="/**" access="ROLE_USER"/>
-    </http>-->
-
-    <http auto-config="true" >
-        <form-login login-page="/signin.jsp" default-target-url="/"/>
+    <http auto-config="true" authentication-manager-ref="authenticationManager">
+        <form-login login-page="/signin.jsp" default-target-url="/#!/" login-processing-url="/signin" always-use-default-target="true"/>
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout logout-url="/logout" logout-success-url="/signin.jsp"/>
+        <custom-filter ref="fbSigninFilter" before="FORM_LOGIN_FILTER"/>
     </http>
 
-    <authentication-manager>
+    <authentication-manager id="authenticationManager">
         <authentication-provider user-service-ref="fbUserDetailService"/>
     </authentication-manager>
 
-   <!-- <authentication-provider>
-        <user-service>
-            <user name="user" password="password" authorities="ROLE_USER" />
-            <user name="admin" password="password" authorities="ROLE_USER,ROLE_ADMIN"/>
-        </user-service>
-    </authentication-provider>-->
-
     <b:bean id="fbUserDetailService" class="ru.gosuslugi.geps.ng.security.FbUserDetailService"/>
+    <b:bean id="fbSigninFilter" class="ru.gosuslugi.geps.ng.security.FbSignInFilter">
+        <b:property name="authenticationManager" ref="authenticationManager"/>
+        <b:property name="clientId" value="${facebook.client.id}"/>
+        <b:property name="secret" value="${facebook.secret}"/>
+        <b:property name="siteUrl" value="${facebook.site.url}"/>
+    </b:bean>
 
 
 </b:beans>

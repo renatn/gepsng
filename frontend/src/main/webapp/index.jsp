@@ -9,7 +9,9 @@
 <head>
     <meta charset="UTF-8">
     <title>GEPS New Generation</title>
-    <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
+
     <style type="text/css">
         body {
             padding-top: 60px;

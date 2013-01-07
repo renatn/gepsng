@@ -2,8 +2,7 @@
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          session="false" %>
-<%@page import="java.net.URLEncoder" %>
-<%@ page import="ru.gosuslugi.geps.ng.facebook.FacebookClient" %>
+<%@page import="ru.gosuslugi.geps.ng.facebook.FacebookClient" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +33,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="./">ГЭПС</a>
+
             <div class="btn-group pull-right">
                 <a class="btn btn-primary" href="<%= fbURL %>">Connect with facebook</a>
             </div>

@@ -1,0 +1,11 @@
+.messages {
+    list-style: none outside none;
+}
+
+.messages li {
+    border-top: 1px solid #DDDDE2;
+}
+
+.overview {
+    padding: 0.5em 0.75em;
+}

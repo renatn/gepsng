@@ -11,6 +11,7 @@
     <title>GEPS New Generation</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
 
     <style type="text/css">
         body {
@@ -66,7 +67,7 @@
 
 </div>
 
-<jsp:include page="WEB-INF/templates/messages-table.jsp"/>
+<jsp:include page="WEB-INF/templates/messages-list.jsp"/>
 <jsp:include page="WEB-INF/templates/message-view.jsp"/>
 <jsp:include page="WEB-INF/templates/message-edit.jsp"/>
 

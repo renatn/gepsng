@@ -3,6 +3,7 @@
          pageEncoding="UTF-8"
          session="false" %>
 <%@page import="java.net.URLEncoder" %>
+<%@ page import="ru.gosuslugi.geps.ng.facebook.FacebookClient" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <style type="text/css">
+    <style type="text/css" media="screen">
         body {
             padding-top: 60px;
             padding-bottom: 40px;
@@ -26,7 +27,7 @@
 </head>
 <body>
 <%
-    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=${facebook.client.id}&redirect_uri=" + URLEncoder.encode("${facebook.site.url}", "UTF-8") + "&scope=email";
+    String fbURL = FacebookClient.getLoginUrl("${facebook.client.id}", "${facebook.site.url}");
 %>
 
 <div class="navbar navbar-inverse navbar-fixed-top">

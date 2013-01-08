@@ -1,11 +1,13 @@
 package ru.gosuslugi.geps.ng.service.impl;
 
+import ru.gosuslugi.geps.ng.dao.MessageDao;
+import ru.gosuslugi.geps.ng.dao.impl.MessageDaoImpl;
 import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.model.User;
 import ru.gosuslugi.geps.ng.service.MessageService;
+import ru.gosuslugi.geps.ng.service.ServiceException;
 import ru.gosuslugi.geps.ng.service.UserService;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -18,53 +20,28 @@ import java.util.Random;
  */
 public class MessageServiceImpl implements MessageService {
 
-    private static List<Message> messages = new ArrayList<Message>();
     private static UserService userService = new UserServiceImpl();
-
-    static {
-
-        Message message = new Message();
-        message.setMessageId(123L);
-        message.setFromId(4444L);
-        message.setToId(1L);
-        message.setSubject("Hello World!");
-        message.setText("Amazing");
-        message.setSendDate(new Date());
-        message.setUpdateDate(new Date());
-
-        messages.add(message);
-
-        message = new Message();
-        message.setFromId(4444L);
-        message.setMessageId(321L);
-        message.setSubject("Star Wars");
-        message.setText("Episode 7");
-        message.setSendDate(new Date());
-        message.setToId(2L);
-        message.setUpdateDate(new Date());
-
-        messages.add(message);
-    }
+    private MessageDao messageDao = new MessageDaoImpl();
 
     @Override
-    public Message getMessageById(Long userId, Long messageId) {
-        for (Message message : messages) {
-            if (message.getMessageId().equals(messageId)) {
-                checkPermission(userId, message);
-                return message;
-            }
+    public Message getMessageById(Long userId, Long messageId) throws ServiceException {
+        Message message = messageDao.getMessageById(messageId);
+        if (message != null) {
+            checkPermission(userId, message);
+            return message;
         }
         return null;
     }
 
     @Override
-    public List<Message> getMessages(Long userId) {
-        return messages;
+    public List<Message> getMessages(Long userId) throws ServiceException {
+        return messageDao.getUserMessages(userId);
     }
 
     @Override
-    public Message create(Long userId, Message message) {
+    public Message create(Long userId, Message message) throws ServiceException {
         checkUserExist(userId);
+        //TODO: validate toId, and etc
 
         Random random = new Random(System.currentTimeMillis());
 
@@ -73,12 +50,12 @@ public class MessageServiceImpl implements MessageService {
         message.setUpdateDate(new Date());
         message.setSendDate(null);
 
-        messages.add(message);
+        messageDao.create(message);
         return message;
     }
 
     @Override
-    public Message update(Long userId, Message message) {
+    public Message update(Long userId, Message message) throws ServiceException {
 
         Message found = getMessageById(userId, message.getMessageId());
         if (found == null) {
@@ -102,7 +79,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message send(Long senderId, Long recipientId, Long messageId) {
+    public Message send(Long senderId, Long recipientId, Long messageId) throws ServiceException {
         Message message = getMessageById(senderId, messageId);
         if (message == null) {
             throw new RuntimeException("error.service.message.not.found");

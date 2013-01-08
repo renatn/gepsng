@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface MessageService {
 
-    Message getMessageById(Long userId, Long messageId);
+    Message getMessageById(Long userId, Long messageId) throws ServiceException;
 
-    List<Message> getMessages(Long userId);
+    List<Message> getMessages(Long userId) throws ServiceException;
 
-    Message create(Long userId, Message message);
-    Message update(Long userId, Message message);
+    Message create(Long userId, Message message) throws ServiceException;
+    Message update(Long userId, Message message) throws ServiceException;
 
-    Message send(Long senderId, Long recipientId, Long messageId);
+    Message send(Long senderId, Long recipientId, Long messageId) throws ServiceException;
 
 }

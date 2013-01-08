@@ -5,7 +5,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import ru.gosuslugi.geps.ng.facebook.FacebookClient;
 import ru.gosuslugi.geps.ng.facebook.FacebookProfile;
 
@@ -42,7 +41,7 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
         if (token.startsWith("{")) {
             throw new IOException("error on requesting token: " + token + " with code: " + code);
         }
-        FacebookProfile profile = client.requestUserData(token);
+        FacebookProfile profile = client.requestProfile(token);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getName(), "N/A");
         authentication.setDetails(authenticationDetailsSource.buildDetails(req));

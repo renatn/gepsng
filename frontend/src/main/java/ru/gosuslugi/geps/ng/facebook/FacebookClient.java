@@ -46,7 +46,7 @@ public class FacebookClient {
         return b.toString();
     }
 
-    public FacebookProfile requestUserData(String token) throws IOException {
+    public FacebookProfile requestProfile(String token) throws IOException {
         String g = "https://graph.facebook.com/me?" + token;
         URL u = new URL(g);
         URLConnection c = u.openConnection();

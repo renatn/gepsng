@@ -1,5 +1,7 @@
 package ru.gosuslugi.geps.ng.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,8 @@ import java.util.Date;
  * Date: 16.12.12
  * Time: 12:49
  */
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
 
     private Long messageId;

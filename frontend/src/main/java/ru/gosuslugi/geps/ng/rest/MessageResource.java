@@ -5,6 +5,7 @@ import ru.gosuslugi.geps.ng.dto.UserDto;
 import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.model.User;
 import ru.gosuslugi.geps.ng.service.MessageService;
+import ru.gosuslugi.geps.ng.service.ServiceException;
 import ru.gosuslugi.geps.ng.service.UserService;
 import ru.gosuslugi.geps.ng.service.impl.MessageServiceImpl;
 import ru.gosuslugi.geps.ng.service.impl.UserServiceImpl;
@@ -24,6 +25,8 @@ import java.util.List;
 @Produces({MediaType.APPLICATION_JSON})
 public class MessageResource {
 
+    //TODO: use logger
+
     private static UserService userService = new UserServiceImpl();
     private static MessageService messageService = new MessageServiceImpl();
 
@@ -34,7 +37,13 @@ public class MessageResource {
 
         List<MessageDto> messageListDto = new ArrayList<MessageDto>();
 
-        List<Message> messages = messageService.getMessages(user.getUserId());
+        List<Message> messages;
+        try {
+            messages = messageService.getMessages(user.getUserId());
+        } catch (ServiceException e) {
+            throw new ApiException("Cannot get messages");
+        }
+
         for (Message message : messages) {
             MessageDto dto = messageToDto(message);
             messageListDto.add(dto);
@@ -54,9 +63,14 @@ public class MessageResource {
 
         User user = userService.getCurrentUser();
 
-        Message message = messageService.getMessageById(user.getUserId(), messageId);
+        Message message;
+        try {
+            message = messageService.getMessageById(user.getUserId(), messageId);
+        } catch (ServiceException e) {
+            throw new ApiException("Cannot get message");
+        }
         if (message == null) {
-            throw new RuntimeException("error.message.not.found");
+            throw new ApiException("error.message.not.found");
         }
 
         return messageToDto(message);
@@ -75,7 +89,12 @@ public class MessageResource {
         message.setSubject(dto.getSubject());
         message.setText(dto.getText());
 
-        Message saved = messageService.create(user.getUserId(), message);
+        Message saved;
+        try {
+            saved = messageService.create(user.getUserId(), message);
+        } catch (ServiceException e) {
+            throw new ApiException("Cannot create message");
+        }
         return new MessageDto(saved);
         //TODO: fill location to new resource
     }
@@ -85,7 +104,12 @@ public class MessageResource {
     public MessageDto sendMessage(@PathParam("toId") Long toId, MessageDto dto) {
 
         User user = userService.getCurrentUser();
-        Message message = messageService.send(user.getUserId(), toId, dto.getMessageId());
+        Message message;
+        try {
+            message = messageService.send(user.getUserId(), toId, dto.getMessageId());
+        } catch (ServiceException e) {
+            throw new ApiException("Cannot send message");
+        }
 
         return messageToDto(message);
     }
@@ -105,7 +129,12 @@ public class MessageResource {
             message.setToId(dto.getRecipient().getUserId());
         }
 
-        Message saved = messageService.update(user.getUserId(), message);
+        Message saved;
+        try {
+            saved = messageService.update(user.getUserId(), message);
+        } catch (ServiceException e) {
+            throw new ApiException("Cannot update message");
+        }
         return messageToDto(saved);
 
     }

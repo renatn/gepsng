@@ -14,11 +14,13 @@ GET /messages
 < Content-Type: application/json
 [{"messageId":123,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":1,"name":"ПФР"},"subject":"Hello World!","text":"Amazing","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null},{"messageId":321,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":2,"name":"Минкомсвязь России"},"subject":"Star Wars","text":"Episode 7","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null}]
 
-Get user message with ID 1.
-GET /messages/1
+
+Get user message with ID.
+GET /messages/{id}
 < 200
 < Content-Type: application/json
 {"messageId":123,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":1,"name":"ПФР"},"subject":"Hello World!","text":"Amazing","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null}
+
 
 Save new message in your inbox
 POST /messages
@@ -31,7 +33,8 @@ POST /messages
 
 -- User Resources --
 This resource allows you to submit payment information to process your *shopping cart* items
-POST /payment
-{ "cc": "12345678900", "cvc": "123", "expiry": "0112" }
+Get user message with ID.
+GET /users/me
 < 200
-{ "receipt": "/payment/receipt/1" }
+< Content-Type: application/json
+{"userId":4444,"name":"Насыров Р.В."}

@@ -77,6 +77,7 @@ public class MessageResource {
     }
 
     @POST
+    // TODO: Return 201 status code
     public MessageDto createMessage(MessageDto dto) {
 
         User user = userService.getCurrentUser();

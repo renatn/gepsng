@@ -37,7 +37,7 @@ var app = app || {};
 
         addMessage: function(message) {
             console.log('add one');
-            $('tbody', this.el).append((new app.MessageRowView({model: message})).render().el);
+            $('.message-list', this.el).append((new app.MessageItemView({model: message})).render().el);
         },
 
         addAll: function() {

@@ -75,7 +75,6 @@
 <script src="static/js/model/user.js"></script>
 <script src="static/js/collection/messages.js"></script>
 <script src="static/js/collection/organizations.js"></script>
-<script src="static/js/view/message_row.js"></script>
 <script src="static/js/view/message_item.js"></script>
 <script src="static/js/view/message_list.js"></script>
 <script src="static/js/view/message_view.js"></script>

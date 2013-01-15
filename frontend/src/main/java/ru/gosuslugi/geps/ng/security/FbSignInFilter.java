@@ -37,11 +37,26 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
         }
 
         FacebookClient client = new FacebookClient(clientId, secret, siteUrl);
-        String token = client.requestAccessToken(code);
-        if (token.startsWith("{")) {
-            throw new IOException("error on requesting token: " + token + " with code: " + code);
+
+        String token;
+        try {
+            token = client.requestAccessToken(code);
+            if (token.startsWith("{")) {
+                //TODO: log exception
+                throw new AuthenticationServiceException("error on requesting token: " + token + " with code: " + code);
+            }
+        } catch (IOException e) {
+            //TODO: log exception
+            throw new AuthenticationServiceException("Error while request facebook access token");
         }
-        FacebookProfile profile = client.requestProfile(token);
+
+        FacebookProfile profile;
+        try {
+             profile = client.requestProfile(token);
+        } catch (IOException e) {
+            //TODO: log exception
+            throw new AuthenticationServiceException("Error while request facebook user profile");
+        }
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getName(), "N/A");
         authentication.setDetails(authenticationDetailsSource.buildDetails(req));

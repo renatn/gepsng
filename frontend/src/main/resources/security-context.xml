@@ -12,8 +12,13 @@
     <http pattern="/signin.jsp" security="none"/>
     <http pattern="/favicon.ico" security="none"/>
 
-    <http auto-config="true" authentication-manager-ref="authenticationManager">
-        <form-login login-page="/signin.jsp" default-target-url="/#!/" login-processing-url="/signin" always-use-default-target="true"/>
+    <http auto-config="true"
+          authentication-manager-ref="authenticationManager"
+          disable-url-rewriting="true">
+        <form-login login-page="/signin.jsp"
+                    default-target-url="/#!/"
+                    login-processing-url="/signin"
+                    always-use-default-target="true"/>
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout logout-url="/logout" logout-success-url="/signin.jsp"/>
         <custom-filter ref="fbSigninFilter" before="FORM_LOGIN_FILTER"/>
@@ -26,10 +31,14 @@
     <b:bean id="fbUserDetailService" class="ru.gosuslugi.geps.ng.security.FbUserDetailService"/>
     <b:bean id="fbSigninFilter" class="ru.gosuslugi.geps.ng.security.FbSignInFilter">
         <b:property name="authenticationManager" ref="authenticationManager"/>
+        <b:property name="authenticationFailureHandler" ref="failureHandler"/>
         <b:property name="clientId" value="${facebook.client.id}"/>
         <b:property name="secret" value="${facebook.secret}"/>
         <b:property name="siteUrl" value="${facebook.site.url}"/>
     </b:bean>
 
+    <b:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <b:property name="defaultFailureUrl" value="/signin.jsp?error=true"/>
+    </b:bean>
 
 </b:beans>

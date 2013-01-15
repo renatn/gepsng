@@ -47,7 +47,7 @@ public class MessageDaoTest {
     public void shouldGetUserMessages() throws Exception {
         MessageDao dao = new MessageDaoImpl();
         List<Message> messages = dao.getUserMessages(4444L);
-        Assert.assertEquals(2, messages.size());
+        Assert.assertEquals(3, messages.size());
     }
 
 }

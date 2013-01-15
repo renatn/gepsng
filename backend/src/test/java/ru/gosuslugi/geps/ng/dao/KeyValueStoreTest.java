@@ -14,7 +14,7 @@ public class KeyValueStoreTest {
 
     @Test
     public void shouldGetSize() throws Exception {
-        Assert.assertEquals(2, KeyValueStore.getSize());
+        Assert.assertEquals(3, KeyValueStore.getSize());
     }
 
     @Test
@@ -33,6 +33,6 @@ public class KeyValueStoreTest {
     @Test
     public void shouldGetByPrefix() throws Exception {
         List<String> messages = KeyValueStore.getByPrefix("message");
-        Assert.assertEquals(2, messages.size());
+        Assert.assertEquals(3, messages.size());
     }
 }

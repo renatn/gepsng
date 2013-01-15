@@ -1,14 +1,11 @@
 package ru.gosuslugi.geps.ng.dao.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import ru.gosuslugi.geps.ng.dao.KeyValueStore;
 import ru.gosuslugi.geps.ng.dao.MessageDao;
 import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.service.ServiceException;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,48 +14,19 @@ import java.util.List;
  * Date: 08.01.13
  * Time: 12:45
  */
-public class MessageDaoImpl implements MessageDao {
-
-    private ObjectMapper objectMapper;
-
-    public MessageDaoImpl() {
-        objectMapper = new ObjectMapper();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        objectMapper.setDateFormat(df);
-        objectMapper.getDeserializationConfig().withDateFormat(df);
-    }
+public class MessageDaoImpl extends AbstractDao<Message> implements MessageDao {
 
     @Override
     public Message create(Message message) throws ServiceException {
-        StringWriter writer = new StringWriter();
-        try {
-            message.setMessageId(KeyValueStore.getNextId());
-            objectMapper.writeValue(writer, message);
-            String key = String.format("message:%s", message.getMessageId().toString());
-            String json = writer.toString();
-            System.out.println(json);
-            KeyValueStore.put(key, json);
-        } catch (IOException e) {
-            throw new ServiceException("Cannot save message");
-        }
-        return getMessageById(message.getMessageId());
+        long id = getNextId();
+        message.setMessageId(id);
+        add("message", id, message);
+        return getById(message.getMessageId());
     }
 
     @Override
-    public Message getMessageById(Long messageId) throws ServiceException {
-
-        String key = String.format("message:%s", messageId.toString());
-        String json = KeyValueStore.get(key);
-        if (json == null || json.isEmpty()) {
-            return null;
-        }
-
-        try {
-            return objectMapper.readValue(json, Message.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new ServiceException("Error parse json");
-        }
+    public Message getById(Long messageId) throws ServiceException {
+        return get("message", messageId, Message.class);
     }
 
     @Override
@@ -67,7 +35,7 @@ public class MessageDaoImpl implements MessageDao {
         List<Message> result = new ArrayList<Message>();
         try {
             for (String json : messages) {
-                Message message = objectMapper.readValue(json, Message.class);
+                Message message = parse(json, Message.class);
                 if (message.getFromId().equals(userId) || (message.getToId() != null && message.getToId().equals(userId))) {
                     result.add(message);
                 }

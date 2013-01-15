@@ -18,14 +18,14 @@ public class MessageDaoTest {
     @Test
     public void shouldGetMessage() throws Exception {
         MessageDao dao = new MessageDaoImpl();
-        Message message = dao.getMessageById(123L);
+        Message message = dao.getById(123L);
         Assert.assertEquals(Long.valueOf(123L), message.getMessageId());
         Assert.assertEquals(Long.valueOf(4444L), message.getFromId());
         Assert.assertEquals(Long.valueOf(1L), message.getToId());
         Assert.assertNotNull(message.getSubject());
         Assert.assertNotNull(message.getText());
         Assert.assertEquals(message.getSendDate(), message.getUpdateDate());
-        Assert.assertNull(dao.getMessageById(555L));
+        Assert.assertNull(dao.getById(555L));
     }
 
 

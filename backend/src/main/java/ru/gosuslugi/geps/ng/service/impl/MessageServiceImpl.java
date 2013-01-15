@@ -25,7 +25,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message getMessageById(Long userId, Long messageId) throws ServiceException {
-        Message message = messageDao.getMessageById(messageId);
+        Message message = messageDao.getById(messageId);
         if (message != null) {
             checkPermission(userId, message);
             return message;

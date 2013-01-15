@@ -14,7 +14,7 @@ public interface MessageDao {
 
     Message create(Message message) throws ServiceException;
 
-    Message getMessageById(Long messageId) throws ServiceException;
+    Message getById(Long messageId) throws ServiceException;
 
     List<Message> getUserMessages(Long userId) throws ServiceException;
 }

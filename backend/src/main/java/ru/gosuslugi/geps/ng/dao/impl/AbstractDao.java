@@ -1,14 +1,14 @@
 package ru.gosuslugi.geps.ng.dao.impl;
 
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import ru.gosuslugi.geps.ng.dao.KeyValueStore;
-import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.service.ServiceException;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: renatn
@@ -40,6 +40,20 @@ public abstract class AbstractDao<T> {
             e.printStackTrace();
             throw new ServiceException("Error parse json");
         }
+    }
+
+    protected List<T> getAll(String entity, Class<T> clazz) throws ServiceException {
+        List<String> elements = KeyValueStore.getByPrefix(entity + ":");
+        List<T> result = new ArrayList<T>();
+        try {
+            for (String json : elements) {
+                result.add(parse(json, clazz));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ServiceException("Error parse json");
+        }
+        return result;
     }
 
     protected void add(String entity, Long id, T value) throws ServiceException {

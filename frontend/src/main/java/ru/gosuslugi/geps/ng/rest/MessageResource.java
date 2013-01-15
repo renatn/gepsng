@@ -4,6 +4,7 @@ import ru.gosuslugi.geps.ng.dto.MessageDto;
 import ru.gosuslugi.geps.ng.dto.UserDto;
 import ru.gosuslugi.geps.ng.model.Message;
 import ru.gosuslugi.geps.ng.model.User;
+import ru.gosuslugi.geps.ng.security.AuthUtil;
 import ru.gosuslugi.geps.ng.service.MessageService;
 import ru.gosuslugi.geps.ng.service.ServiceException;
 import ru.gosuslugi.geps.ng.service.UserService;
@@ -32,6 +33,8 @@ public class MessageResource {
 
     @GET
     public List<MessageDto> getMessages() {
+
+        System.out.println("Auth: " + AuthUtil.getUser());
 
         User user = userService.getCurrentUser();
 

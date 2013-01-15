@@ -9,6 +9,7 @@ public class User {
 
     private Long userId;
     private String name;
+    private String facebookId;
 
     public User() {
     }
@@ -34,4 +35,11 @@ public class User {
         this.name = name;
     }
 
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
 }

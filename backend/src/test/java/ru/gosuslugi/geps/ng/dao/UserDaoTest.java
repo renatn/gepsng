@@ -35,5 +35,38 @@ public class UserDaoTest {
         Assert.assertEquals(createdUser.getUserId(), found.getUserId());
     }
 
+    @Test
+    public void shouldFindByFacebookId() throws Exception {
+        UserDao dao = new UserDaoImpl();
+
+        User user = new User();
+        user.setName("Sergey Brin");
+        user.setFacebookId("1234567890");
+        User createdUser = dao.create(user);
+
+        User found = dao.findByFacebookId(user.getFacebookId());
+        Assert.assertEquals(user.getName(), found.getName());
+        Assert.assertEquals(createdUser.getUserId(), found.getUserId());
+        Assert.assertEquals(user.getFacebookId(), found.getFacebookId());
+
+    }
+
+    @Test
+    public void shouldUpdateUser() throws Exception {
+        UserDao dao = new UserDaoImpl();
+
+        User user = new User();
+        user.setFacebookId("0987654321");
+        User createdUser = dao.create(user);
+
+        createdUser.setName("Bill Gates");
+        createdUser.setFacebookId("987654321");
+        User updatedUser = dao.update(createdUser);
+
+        Assert.assertEquals(createdUser.getName(), updatedUser.getName());
+        Assert.assertEquals(createdUser.getUserId(), updatedUser.getUserId());
+        Assert.assertEquals(createdUser.getFacebookId(), updatedUser.getFacebookId());
+    }
+
 }
 

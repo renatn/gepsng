@@ -1,12 +1,18 @@
 package ru.gosuslugi.geps.ng.security;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import ru.gosuslugi.geps.ng.dao.UserDao;
+import ru.gosuslugi.geps.ng.dao.impl.UserDaoImpl;
 import ru.gosuslugi.geps.ng.facebook.FacebookClient;
 import ru.gosuslugi.geps.ng.facebook.FacebookProfile;
+import ru.gosuslugi.geps.ng.model.User;
+import ru.gosuslugi.geps.ng.service.ServiceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +27,13 @@ import java.io.IOException;
  */
 public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
 
+    protected final Log logger = LogFactory.getLog(getClass());
+
     private String clientId;
     private String secret;
     private String siteUrl;
+
+    private UserDao userDao = new UserDaoImpl();
 
     protected FbSignInFilter() {
         super("/signin");
@@ -58,7 +68,24 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
             throw new AuthenticationServiceException("Error while request facebook user profile");
         }
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getName(), "N/A");
+        // Create new user if not exists
+        try {
+            User found = userDao.findByFacebookId(profile.getId());
+            if (found == null) {
+                ru.gosuslugi.geps.ng.model.User newUser = new ru.gosuslugi.geps.ng.model.User();
+                newUser.setFacebookId(profile.getId());
+                newUser.setName(profile.getName());
+                userDao.create(newUser);
+            }
+        } catch (ServiceException e) {
+            throw new AuthenticationServiceException("Error while fetch user from database");
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("Facebook authentication success. User: " + profile.getName());
+        }
+
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getId(), "N/A");
         authentication.setDetails(authenticationDetailsSource.buildDetails(req));
         return this.getAuthenticationManager().authenticate(authentication);
 

@@ -3,13 +3,21 @@
          pageEncoding="UTF-8"
          session="false" %>
 
-<script type="text/template" id="message-row-template">
-    <td><input type="checkbox" {{ selected ? 'checked' : '' }}></td>
-    <td>{{ messageId }}</td>
-    <td>{{ recipient.name }}</td>
-    <td>{{ subject }}</td>
-    <td>{{ updateDate }}</td>
-    <td>{{ sendDate ? sendDate : 'Черновик' }}</td>
+<script type="text/template" id="message-item-template">
+    <div class="pull-left">
+        <input type="checkbox">
+    </div>
+    <div class="pull-left overview">
+        <span class="muted">{{ messageId }}</span>
+    </div>
+    <div class="pull-right">
+        <p><span class="label">{{ updateDate}}</span></p>
+        <p><span class="label label-success">{{ sendDate ? sendDate : 'Черновик' }}</span></p>
+    </div>
+    <div>
+        <strong>{{ recipient.name }}</strong>
+        <p>{{ subject }}</p>
+    </div>
 </script>
 
 <script type="text/template" id="messages-table-template">
@@ -42,50 +50,7 @@
         <strong>Загрузка...</strong>
     </div>
 
-    <table class="table table-bordered table-striped table-hover hide">
-        <thead>
-        <tr>
-            <th><input id="select-all" type="checkbox"></th>
-            <th>Номер</th>
-            <th>Ведомство</th>
-            <th>Тема</th>
-            <th>Изменено</th>
-            <th>Отправлено</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-
-    <ul class="messages">
-        <li>
-            <div class="pull-left">
-                <input type="checkbox">
-            </div>
-            <div class="pull-left overview">
-                <i class="icon-star"></i>
-            </div>
-            <span class="pull-right">07.01.2013 20:36</span>
-            <div>
-                <strong>МВД Россси</strong>
-                <p>Hello World</p>
-            </div>
-        </li>
-        <li>
-            <div class="pull-left">
-                <input type="checkbox">
-            </div>
-            <div class="pull-left overview">
-                <i class="icon-star-empty"></i>
-            </div>
-            <span class="pull-right">07.01.2013 20:36</span>
-            <div>
-                <strong>ПФР</strong>
-                <p>Звездные войны</p>
-            </div>
-        </li>
-    </ul>
+    <ul class="message-list"></ul>
 
     <div class="pagination pull-right">
         <ul>

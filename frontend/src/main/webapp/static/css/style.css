@@ -1,9 +1,15 @@
-.messages {
+.message-list {
     list-style: none outside none;
+    margin: 0;
 }
 
-.messages li {
+.message-list li {
     border-top: 1px solid #DDDDE2;
+    padding: 10px;
+}
+
+.message-list li:hover {
+    background-color: #DDDDE2;
 }
 
 .overview {

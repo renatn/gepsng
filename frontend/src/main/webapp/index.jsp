@@ -76,6 +76,7 @@
 <script src="static/js/collection/messages.js"></script>
 <script src="static/js/collection/organizations.js"></script>
 <script src="static/js/view/message_row.js"></script>
+<script src="static/js/view/message_item.js"></script>
 <script src="static/js/view/message_list.js"></script>
 <script src="static/js/view/message_view.js"></script>
 <script src="static/js/view/organizations.js"></script>

@@ -1,0 +1,40 @@
+HOST: http://ec2-54-246-12-217.eu-west-1.compute.amazonaws.com/geps/api/v1
+
+--- GEPS API v1 ---
+---
+Welcome to the our sample API documentation. All comments can be written in (support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax)
+---
+--
+Messages Resources
+The following is a section of resources related to the Inbox
+--
+List user messages. 
+GET /messages
+< 200
+< Content-Type: application/json
+[{"messageId":123,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":1,"name":"ПФР"},"subject":"Hello World!","text":"Amazing","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null},{"messageId":321,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":2,"name":"Минкомсвязь России"},"subject":"Star Wars","text":"Episode 7","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null}]
+
+
+Get user message with ID.
+GET /messages/{id}
+< 200
+< Content-Type: application/json
+{"messageId":123,"sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":1,"name":"ПФР"},"subject":"Hello World!","text":"Amazing","updateDate":"06.01.2013 23:23","sendDate":"06.01.2013 23:23","action":null,"selected":null}
+
+
+Save new message in your inbox
+POST /messages
+> Content-Type: application/json
+{"messageId":null,"subject":"Тема сообщения","text":"Текст сообщения","sender":{"userId":4444,"name":"Насыров Р.В."},"recipient":{"userId":2,"name":"Минкомсвязь России"},"sendDate":null,"updateDate":null,"selected":false,"action":null}
+< 201
+< Content-Type: application/json
+{"messageId":747077181,"sender":null,"recipient":null,"subject":"Тема сообщения","text":"Текст сообщения","updateDate":"11.01.2013 14:39","sendDate":null,"action":null,"selected":null}
+
+
+-- User Resources --
+This resource allows you to submit payment information to process your *shopping cart* items
+Get user message with ID.
+GET /users/me
+< 200
+< Content-Type: application/json
+{"userId":4444,"name":"Насыров Р.В."}

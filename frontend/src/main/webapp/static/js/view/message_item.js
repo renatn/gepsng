@@ -5,18 +5,18 @@ var app = app || {};
     // Message View
     // --------------
 
-    app.MessageRowView = Backbone.View.extend({
+    app.MessageItemView = Backbone.View.extend({
 
-        tagName: 'tr',
+        tagName: 'li',
 
         events: {
-            'click'  : 'viewMessage'
+            'click'  : 'openMessage'
         },
 
-        template: _.template($('#message-row-template').html()),
+        template: _.template($('#message-item-template').html()),
 
         initialize: function() {
-            console.log('init message row view');
+            console.log('init message item view');
             this.model.on('change', this.render, this );
         },
 
@@ -26,7 +26,7 @@ var app = app || {};
             return this;
         },
 
-        viewMessage: function() {
+        openMessage: function() {
             console.log('Click on: ' + this.model.get('messageId'));
 
             var target = '!/messages/' + this.model.get('messageId');

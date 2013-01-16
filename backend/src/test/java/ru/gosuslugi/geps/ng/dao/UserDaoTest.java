@@ -68,5 +68,12 @@ public class UserDaoTest {
         Assert.assertEquals(createdUser.getFacebookId(), updatedUser.getFacebookId());
     }
 
+    @Test
+    public void shouldFindExistUser() throws Exception{
+        UserDao dao = new UserDaoImpl();
+        User user = dao.findByFacebookId("100002223950429");
+        Assert.assertEquals("100002223950429", user.getFacebookId());
+    }
+
 }
 

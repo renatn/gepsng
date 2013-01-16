@@ -22,7 +22,7 @@ public class FacebookClient {
     private String siteUrl;
 
     public FacebookClient(String clientId, String secret, String siteUrl) {
-        this.clientId  = clientId;
+        this.clientId = clientId;
         this.secret = secret;
         this.siteUrl = siteUrl;
     }
@@ -43,7 +43,12 @@ public class FacebookClient {
         while ((inputLine = in.readLine()) != null)
             b.append(inputLine).append("\n");
         in.close();
-        return b.toString();
+
+        String token = b.toString();
+        if (token.startsWith("{")) {
+            throw new IOException("error on requesting token: " + token + " with code: " + code);
+        }
+        return token;
     }
 
     public FacebookProfile requestProfile(String token) throws IOException {
@@ -62,8 +67,8 @@ public class FacebookClient {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return "http://www.facebook.com/dialog/oauth?client_id="+clientId
-                +"&redirect_uri=" + encodedSiteUrl
+        return "http://www.facebook.com/dialog/oauth?client_id=" + clientId
+                + "&redirect_uri=" + encodedSiteUrl
                 + "&scope=email";
     }
 }

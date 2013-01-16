@@ -14,7 +14,7 @@ public class KeyValueStoreTest {
 
     @Test
     public void shouldGetSize() throws Exception {
-        Assert.assertEquals(3, KeyValueStore.getSize());
+        Assert.assertEquals(4, KeyValueStore.getSize());
     }
 
     @Test

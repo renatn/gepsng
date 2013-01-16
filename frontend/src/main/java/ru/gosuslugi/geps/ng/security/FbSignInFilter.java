@@ -51,13 +51,9 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
         String token;
         try {
             token = client.requestAccessToken(code);
-            if (token.startsWith("{")) {
-                //TODO: log exception
-                throw new AuthenticationServiceException("error on requesting token: " + token + " with code: " + code);
-            }
         } catch (IOException e) {
             //TODO: log exception
-            throw new AuthenticationServiceException("Error while request facebook access token");
+            throw new AuthenticationServiceException("Error on requesting facebook access token");
         }
 
         FacebookProfile profile;
@@ -78,7 +74,7 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
                 userDao.create(newUser);
             }
         } catch (ServiceException e) {
-            throw new AuthenticationServiceException("Error while fetch user from database");
+            throw new AuthenticationServiceException("Error on fetching user from database");
         }
 
         if (logger.isDebugEnabled()) {

@@ -1,3 +1,11 @@
+footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
+    padding: 30px 0;
+    text-align: center;
+
+}
+
 .message-list {
     list-style: none outside none;
     margin: 0;

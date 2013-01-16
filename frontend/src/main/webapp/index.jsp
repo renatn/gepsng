@@ -16,7 +16,6 @@
     <style type="text/css">
         body {
             padding-top: 60px;
-            padding-bottom: 40px;
         }
     </style>
 
@@ -40,15 +39,15 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/">ГЭПС</a>
+            <a class="brand" href="${pageContext.request.contextPath}/">ГЭПС</a>
 
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="#!/"><sec:authentication property="principal.username"/></a>
+                <a class="btn btn-inverse" href="${pageContext.request.contextPath}/#!/"><sec:authentication property="principal.username"/></a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="/geps/logout">Выход</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout"><i class="icon-off"></i> Выход</a></li>
                 </ul>
             </div>
         </div>
@@ -66,6 +65,12 @@
     </div>
 
 </div>
+
+<footer>
+    <div class="container">
+        <p>Renat Nasyrov (c) 2012-2013 </p>
+    </div>
+</footer>
 
 <jsp:include page="WEB-INF/templates/messages-list.jsp"/>
 <jsp:include page="WEB-INF/templates/message-view.jsp"/>

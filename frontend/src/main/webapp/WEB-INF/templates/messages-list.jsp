@@ -11,11 +11,10 @@
         <span class="muted">{{ messageId }}</span>
     </div>
     <div class="pull-right">
-        <p><span class="label">{{ updateDate}}</span></p>
-        <p><span class="label label-success">{{ sendDate ? sendDate : 'Черновик' }}</span></p>
+        <span class="label label-success">{{ sendDate ? sendDate : 'Черновик' }}</span>
     </div>
     <div>
-        <strong>{{ recipient.name }}</strong>
+        <p><strong>{{ recipient.name }}</strong> <small class="muted">{{updateDate}}</small></p>
         <p>{{ subject }}</p>
     </div>
 </script>
@@ -23,7 +22,7 @@
 <script type="text/template" id="messages-table-template">
 
     <div class="toolbar">
-        <a id="createThread" class="btn btn-primary" href="#!/messages/edit"><i class="icon-plus"></i>Создать обращение</a>
+        <a id="createThread" class="btn btn-primary" href="${pageContext.request.contextPath}/#!/messages/edit"><i class="icon-plus"></i>Создать обращение</a>
         <div class="btn-group">
             <a class="btn dropdown-toggle" data-toggle="dropdown">
                 Создать из шаблона

@@ -42,7 +42,7 @@
             <a class="brand" href="${pageContext.request.contextPath}/">ГЭПС</a>
 
             <div class="btn-group pull-right">
-                <a class="btn btn-inverse" href="${pageContext.request.contextPath}/#!/"><sec:authentication property="principal.username"/></a>
+                <a class="btn btn-inverse" href="${pageContext.request.contextPath}/#!/">${requestScope.username}</a>
                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>

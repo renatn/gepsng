@@ -11,14 +11,18 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class AuthUtil {
 
-    public static String getUser() {
+    public static String getUserPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
+        if (authentication == null || authentication.getPrincipal() == null) {
+            return null;
+        }
+
+        if (!(authentication.getPrincipal() instanceof UserDetails)) {
             return null;
         }
 
         UserDetails principal = (UserDetails) authentication.getPrincipal();
-        return principal.toString();
+        return principal.getUsername();
     }
 
 

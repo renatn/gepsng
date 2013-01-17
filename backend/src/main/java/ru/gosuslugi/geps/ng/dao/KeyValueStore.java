@@ -25,8 +25,7 @@ public class KeyValueStore {
                 "{\"messageId\":321, \"fromId\":4444, \"toId\":2, \"subject\":\"Star Wars\", \"text\":\"Episode 7\", \"sendDate\":\"2013-01-08 16:14:00\",\"updateDate\":\"2013-01-08 16:14:00\"}");
         store.put("message:544",
                 "{\"messageId\":544, \"fromId\":4444, \"toId\":2, \"subject\":\"Обращения в службу поддержки\", \"text\":\"Добрый день\", \"sendDate\":\"2013-01-08 16:14:00\",\"updateDate\":\"2013-01-08 16:14:00\"}");
-        store.put("user:4444","{\"userId\":4444, \"facebookId\":\"100002223950429\"}");
-
+        store.put("user:4444","{\"userId\":4444, \"name\": \"Renat Nasyrov\",\"facebookId\":\"100002223950429\"}");
     }
 
     public static String get(String key) {

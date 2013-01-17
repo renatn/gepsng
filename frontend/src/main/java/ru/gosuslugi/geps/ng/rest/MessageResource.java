@@ -34,8 +34,6 @@ public class MessageResource {
     @GET
     public List<MessageDto> getMessages() {
 
-        System.out.println("Auth: " + AuthUtil.getUser());
-
         User user = userService.getCurrentUser();
 
         List<MessageDto> messageListDto = new ArrayList<MessageDto>();

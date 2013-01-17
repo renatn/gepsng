@@ -56,6 +56,7 @@
         <b:property name="key" value="DEADDEAD"/>
         <b:property name="alwaysRemember" value="true"/>
         <b:property name="cookieName" value="rm"/>
+        <b:property name="tokenValiditySeconds" value="43200"/>
     </b:bean>
 
 </b:beans>

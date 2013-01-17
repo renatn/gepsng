@@ -28,7 +28,7 @@ public class FbUserDetailService implements UserDetailsService {
 
         ru.gosuslugi.geps.ng.model.User found;
         try {
-            found = userDao.findByFacebookId(username);
+            found = userDao.getById(Long.valueOf(username));
             if (found == null) {
                 throw new UsernameNotFoundException("User not found!");
             }
@@ -39,7 +39,7 @@ public class FbUserDetailService implements UserDetailsService {
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
         Collection<GrantedAuthority> authorities = Collections.singletonList(authority);
 
-        return new User(username, "N/A", authorities);
+        return new User(found.getUserId().toString(), "N/A", authorities);
     }
 
 

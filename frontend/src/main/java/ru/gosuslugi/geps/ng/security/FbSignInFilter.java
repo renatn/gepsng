@@ -65,13 +65,14 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
         }
 
         // Create new user if not exists
+        User user;
         try {
-            User found = userDao.findByFacebookId(profile.getId());
-            if (found == null) {
+            user = userDao.findByFacebookId(profile.getId());
+            if (user == null) {
                 ru.gosuslugi.geps.ng.model.User newUser = new ru.gosuslugi.geps.ng.model.User();
                 newUser.setFacebookId(profile.getId());
                 newUser.setName(profile.getName());
-                userDao.create(newUser);
+                user = userDao.create(newUser);
             }
         } catch (ServiceException e) {
             throw new AuthenticationServiceException("Error on fetching user from database");
@@ -81,7 +82,7 @@ public class FbSignInFilter extends AbstractAuthenticationProcessingFilter {
             logger.debug("Facebook authentication success. User: " + profile.getName());
         }
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(profile.getId(), "N/A");
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getUserId().toString(), "N/A");
         authentication.setDetails(authenticationDetailsSource.buildDetails(req));
         return this.getAuthenticationManager().authenticate(authentication);
 

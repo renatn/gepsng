@@ -73,6 +73,7 @@ public class UserDaoTest {
         UserDao dao = new UserDaoImpl();
         User user = dao.findByFacebookId("100002223950429");
         Assert.assertEquals("100002223950429", user.getFacebookId());
+        Assert.assertEquals(Long.valueOf(4444L), user.getUserId());
     }
 
 }

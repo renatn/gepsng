@@ -20,11 +20,11 @@
 
         <custom-filter ref="fbSigninFilter" before="FORM_LOGIN_FILTER"/>
 
-        <form-login login-page="/signin.jsp"
+        <form-login login-page="/signin"
                     default-target-url="/#!/"
                     always-use-default-target="true"/>
 
-        <logout logout-url="/logout" logout-success-url="/signin.jsp"/>
+        <logout logout-url="/logout" logout-success-url="/signin"/>
     </http>
 
     <authentication-manager id="authenticationManager">
@@ -32,7 +32,7 @@
     </authentication-manager>
 
     <b:bean id="fbSigninFilter" class="ru.gosuslugi.geps.ng.security.FbSignInFilter">
-        <b:property name="filterProcessesUrl" value="/signin"/>
+        <b:property name="filterProcessesUrl" value="/oauth"/>
         <b:property name="authenticationManager" ref="authenticationManager"/>
         <b:property name="rememberMeServices" ref="rememberMeServices"/>
         <b:property name="authenticationFailureHandler" ref="failureHandler"/>
